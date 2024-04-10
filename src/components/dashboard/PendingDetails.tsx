@@ -10,7 +10,7 @@ import Loading from "@/components/loading/loading";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Terminal } from "lucide-react";
+import { BadgeCheckIcon, Terminal } from "lucide-react";
 
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -37,7 +37,11 @@ export default function PendingDays({ days, error, loading, setForDate, forDate,
                     {
                         days && days.length === 0
                             ? <div>
-                                <p className="my-2">No pending days.</p>
+                                <Alert variant={"default"} className="mt-2 text-muted-foreground">
+                                    <BadgeCheckIcon opacity={0.7} />
+                                    <AlertTitle>No pending days</AlertTitle>
+                                    <AlertDescription>You don't have any pending days</AlertDescription>
+                                </Alert>
                             </div>
                             : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 ">
                                 {days?.map((date, index) => {

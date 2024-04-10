@@ -1,31 +1,18 @@
 
 import { useEffect, useState } from "react";
-import axios, { AxiosError, CustomParamsSerializer, ParamsSerializerOptions } from "axios";
-import backendUrls from "@/constants/backendUrls";
+import { AxiosError } from "axios";
 import Trade from "@/models/trade/Trade";
 import { SORT } from "@/constants/SortType";
 import TradeFilters from "@/types/filters";
+import { useNavigate } from "react-router-dom";
+import http from "../axiosConfig";
 
 
 export default function useFetchAllTrades(url: string, sort?: SORT, filters?: TradeFilters) {
     const [list, setList] = useState<Trade[] | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-
-    const serializer: CustomParamsSerializer = (params) => {
-        const newParams: any = {};
-
-        for (const key in params) {
-            if (Array.isArray(params[key])) {
-                newParams[key] = params[key].join(',');
-            } else {
-                newParams[key] = params[key];
-            }
-        }
-        console.log({ newParams });
-
-        return newParams;
-    };
+    const navigate = useNavigate();
 
     const fetchData = () => {
         setLoading(true)
@@ -35,7 +22,7 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
         filters?.instrumentType.index ? instrumentType.push("INDEX") : null;
         filters?.instrumentType.commodity ? instrumentType.push("COMMODITY") : null; 
 
-        axios.get(url, {
+        http.get(url, {
             params: {
                 sort: sort,
                 showHoliday: filters?.showHoliday,
@@ -44,6 +31,7 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
                 // instrumentType
             },
             // paramsSerializer: serializer
+
         })
             .then(res => {
                 setList(res.data)
@@ -57,6 +45,9 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
     }
 
     useEffect(() => {
+        if (sessionStorage.getItem("token") === null)
+            return navigate("/login")
+
         fetchData()
     }, [sort, filters])
 

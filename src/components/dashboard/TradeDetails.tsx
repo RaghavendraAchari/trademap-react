@@ -27,7 +27,7 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
     const settingsContext = useContext(SettingsContext);
 
     return <div data-tradedetails className={cn(className)} {...props}>
-        <div className="flex flex-row justify-between align-center mb-2 flex-none">
+        <div className="flex flex-row justify-between align-center mb-2 flex-none px-3">
             <h3 className="text-lg font-bold">Trades:</h3>
             <div className="flex flex-col justify-end space-y-1 space-x-1 md:flex-none md:flex-row md:justify-end md:space-y-0">
                 {trades && <TotalPnL trades={trades} />}
@@ -40,7 +40,7 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
             </div>
         </div>
 
-        <Separator className="flex-none" />
+        <Separator className="flex-none " />
 
         <div className="grow w-full max-h-full flex flex-col px-1 md:overflow-y-auto">
             {loading ? <Loading /> : null}
@@ -57,7 +57,11 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
 
             {
                 !loading && trades && trades.length > 0
-                    ? <TradesOfTheDay maxTradeLimit={settingsContext.data?.maxTradesLimit} trades={trades} forDate={forDate} onDataSubmit={onDataSubmit} />
+                    ? <TradesOfTheDay
+                        maxTradeLimit={settingsContext.data?.maxTradesLimit}
+                        trades={trades}
+                        forDate={forDate}
+                        onDataSubmit={onDataSubmit} />
                     : null
             }
             {

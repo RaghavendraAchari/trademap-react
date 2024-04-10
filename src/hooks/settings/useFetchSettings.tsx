@@ -1,9 +1,7 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import Settings from "@/models/settings/settings.model";
 import http from "../axiosConfig";
-
-
 
 export default function useFetchSettings(url: string) {
     const [data, setData] = useState<Settings | null>(null)

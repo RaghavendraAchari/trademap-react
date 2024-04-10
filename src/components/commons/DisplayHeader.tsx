@@ -1,7 +1,10 @@
 import useCurrentDate from "../../hooks/useCurrentTime"
-import { HTMLAttributes } from "react"
+import { HTMLAttributes, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+import { differenceInMinutes, differenceInSeconds } from "date-fns"
+
+
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 
@@ -10,6 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export default function DisplayHeader({ className, ...props }: Props) {
     const { dateAsString } = useCurrentDate()
     const pathname = useLocation().pathname;
+
 
     let title = null;
     let description = null;
@@ -39,6 +43,10 @@ export default function DisplayHeader({ className, ...props }: Props) {
             title = 'Analytics'
             description = "Summary of your trading journey."
             break;
+        case "/home/swing/":
+            title = 'Swing Trade'
+            description = "Actively monitor and track short term trades."
+            break;
         case "/home/test/":
             title = 'Test'
             description = "Test app components here."
@@ -50,6 +58,42 @@ export default function DisplayHeader({ className, ...props }: Props) {
 
     return <div className={cn(className)} {...props}>
         <h1 className='text-3xl font-extrabold opacity-80'>{title}</h1>
-        <p className="font-medium pt-2" suppressHydrationWarning>{description}</p>
+        <p className="font-medium pt-2 flex justify-between" >{description} <RemainingTime /></p>
     </div>
+}
+
+function RemainingTime() {
+    const [time, setTime] = useState("");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        function setTimeDifference() {
+            if (!sessionStorage.getItem("startTime"))
+                return setTime("login")
+
+            const endTime = new Date(parseInt(sessionStorage.getItem("startTime") as string));
+            const difference = differenceInMinutes(endTime, new Date());
+
+            if (difference <= 0) {
+                sessionStorage.clear()
+
+                navigate("/login")
+            }
+
+            setTime(difference.toString() + " minutes")
+        }
+
+        setTimeDifference();
+
+        const timer = setInterval(() => {
+            setTimeDifference()
+        }, 1000 * 60)
+
+        return () => {
+            clearInterval(timer)
+        }
+
+    }, [])
+
+    return <span className="text-xs">Remaining session time : {time}</span>;
 }

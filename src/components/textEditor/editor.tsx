@@ -12,9 +12,10 @@ type Props = {
     id: string;
     edit: boolean,
     className?: string
+    autoSave?: boolean
 };
 
-export default function Editor({ id, data, setData, edit = false, className }: Props) {
+export default function Editor({ id, data, setData, edit = false, className, autoSave }: Props) {
     //add a reference to editor
     const ref = useRef<EditorJS>();
 
@@ -46,10 +47,21 @@ export default function Editor({ id, data, setData, edit = false, className }: P
             },
         });
 
+        let timer: any = null;
+
+        if (autoSave && autoSave === true && edit === true) {
+            timer = setInterval(() => {
+                handleOnSave();
+            }, 1000 * 5)
+        }
+
 
         //add a return function handle cleanup
         return () => {
             // console.log("Destroying editor on unmount");
+            if (timer) {
+                clearInterval(timer);
+            }
 
             if (ref.current && ref.current.destroy) {
                 ref.current.destroy();

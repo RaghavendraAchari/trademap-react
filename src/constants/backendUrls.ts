@@ -1,9 +1,11 @@
-const baseUrl = "http://localhost:8080"
+const baseUrl = process.env.SERVER || "http://localhost:8080"
 
 const allTrades = baseUrl + "/tradedetails"
 const maxTradedDays = allTrades + "/getMaxDaysTraded"
 const pendingDays = allTrades + "/pendingDates"
 const setupsAndInstuments = allTrades + "/setupsAndInstuments"
+const forDate = allTrades + "/forDate"
+const setNoTradingDay = allTrades + "/setNoTradingDay"
 
 const allNotes = baseUrl + "/notes"
 const categoriesAndTags = allNotes + "/categoriesAndTags"
@@ -16,14 +18,20 @@ const settings = baseUrl + "/settings"
 
 const analytics = baseUrl + "/analytics"
 
+const users = baseUrl + "/users"
+
+const investmentDetails = baseUrl + "/investmentdetails"
+
 export default {
     baseUrl: baseUrl,
     tradeDetails: {
         allTrades,
+        forDate,
         pendingDays,
         setupsAndInstuments,
         getImageDownloadablePath,
-        maxTradedDays
+        maxTradedDays,
+        noTradingDay: setNoTradingDay
     },
     notes: {
         allNotes,
@@ -35,7 +43,13 @@ export default {
         uploadContentImage
     },
     settings: settings,
-    analytics: analytics
+    analytics: analytics,
+    users: {
+        allUsers: users,
+        create: users + "/create",
+        validate: users + "/validate"
+    },
+    investmentDetails
 }
 
 function getImageDownloadablePath(path: string) {

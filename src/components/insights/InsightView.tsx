@@ -14,6 +14,7 @@ import { isMobile } from 'react-device-detect';
 import axios, { AxiosError } from "axios";
 import backendUrls from "@/constants/backendUrls";
 import { useToast } from "@/components/ui/use-toast";
+import http from "@/hooks/axiosConfig";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     edit: boolean,
@@ -82,7 +83,7 @@ export default function InsightView({ insight, openDrawer, setOpenDrawer, closeW
 
     const onSaveClicked = async (data: OutputData) => {
         try {
-            const response = await axios.put<Insight>(backendUrls.insights.allInsights, {
+            const response = await http.put<Insight>(backendUrls.insights.allInsights, {
                 id: insight.id,
                 content: JSON.stringify(data)
             })

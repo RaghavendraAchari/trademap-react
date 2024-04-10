@@ -11,6 +11,7 @@ import NotesPage from './routes/pages/notes/page';
 import Analytics from './routes/pages/analytics/page';
 import Insights from './routes/pages/insights/page';
 import SettingsContextProvider from './context/SettingsContext';
+import Swing from './routes/pages/swing/swing';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path='/notes/' element={<NotesPage />} />
           <Route path='/insights/' element={<Insights />} />
           <Route path='/analytics/' element={<Analytics />} />
+          <Route path='/swing/' element={<Swing />} />
           <Route path='*' element={<Home />} />
         </Routes>
 

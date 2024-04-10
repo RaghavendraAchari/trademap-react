@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import http from "./axiosConfig";
 import { useEffect, useState } from "react";
 
 export default function useFetch<T>(url: string) {
@@ -7,8 +7,6 @@ export default function useFetch<T>(url: string) {
     const [error, setError] = useState<string | null>(null)
 
     const refresh = async () => {
-        console.log("refreshing data");
-
         await fetchData(url)
     }
 
@@ -16,8 +14,10 @@ export default function useFetch<T>(url: string) {
         setLoading(true)
 
         try {
-            const response = await axios.get<T>(url);
+            const response = await http.get<T>(url);
+
             if (error !== null) setError(null)
+
             setData(response.data)
         } catch (e: any) {
             setError(e.name)

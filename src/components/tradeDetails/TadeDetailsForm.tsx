@@ -26,9 +26,7 @@ import SetupsAndInstruments from "@/models/trade/SetupsAndInstruments"
 import backendUrls from "@/constants/backendUrls"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { SettingsContext } from "@/context/SettingsContext";
-import { Popover } from "../ui/popover";
-import { PopoverContent } from "@radix-ui/react-popover";
+import http from "@/hooks/axiosConfig";
 
 
 function getDateInISOAsLocalDate(date: Date): string {
@@ -112,7 +110,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
         })
 
         // send to backend
-        axios.post("http://localhost:8080/tradedetails",
+        http.post("http://localhost:8080/tradedetails",
             uploadObject,
             {
                 headers: {
@@ -152,7 +150,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
     useEffect(() => {
         setFetchingData(true)
 
-        axios.get<{ days: number }>("http://localhost:8080/tradedetails/getMaxDaysTraded")
+        http.get<{ days: number }>(backendUrls.tradeDetails.maxTradedDays)
             .then(res => {
 
                 if (res.status === 200) {
@@ -222,7 +220,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
         }
     }
 
-    return <div className="flex w-full justify-center p-2">
+    return <div className="">
         <Dialog open={formOpen} onOpenChange={setFormOpen}>
             <DialogTrigger asChild >
                 <Button disabled={disabled} className="justify-self-center w-fit " variant={"outline"}>+ Add new trade details</Button>

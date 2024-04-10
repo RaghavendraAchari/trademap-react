@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import Analytics from "@/models/analytics/analytics";
+import http from "../axiosConfig";
 
 
 export default function useFetchAnalytics(url: string) {
@@ -11,7 +12,7 @@ export default function useFetchAnalytics(url: string) {
     const fetchData = () => {
         setLoading(true)
 
-        axios.get(url)
+        http.get(url)
             .then(res => {
                 setData(res.data)
                 setLoading(false)

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Insight from "../../models/insights/Insight.model";
 import axios, { AxiosError } from "axios";
+import http from "../axiosConfig";
 
 export default function useFetchInsights(url: string) {
     const [list, setList] = useState<Insight[] | null>(null);
@@ -10,7 +11,7 @@ export default function useFetchInsights(url: string) {
     const fetchData = () => {
         setLoading(true)
 
-        axios.get(url)
+        http.get(url)
             .then(res => {
                 setList(res.data)
                 setLoading(false)
@@ -42,7 +43,7 @@ export function useFetchInsightDetails(url: string, id: number) {
     const fetchData = () => {
         setLoading(true)
 
-        axios.get(url + "/" + id.toString())
+        http.get(url + "/" + id.toString())
             .then(res => {
                 setInsight(res.data)
                 setLoading(false)

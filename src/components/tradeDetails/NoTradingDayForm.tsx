@@ -8,6 +8,8 @@ import { Checkbox } from "../ui/checkbox"
 import useRefreshEvent from "../../hooks/useRefreshEvent"
 import Loader from "../commons/LoadingSpinner"
 import { Textarea } from "../ui/textarea"
+import http from "@/hooks/axiosConfig"
+import backendUrls from "@/constants/backendUrls"
 
 
 interface Props {
@@ -49,7 +51,7 @@ export default function NoTradingDayForm({ forDate, onDataSubmit }: Props) {
         }
         setSubmitig(true)
 
-        axios.post("http://localhost:8080/tradedetails/setNoTradingDay", postData)
+        http.post(backendUrls.tradeDetails.noTradingDay, postData)
             .then(() => {
                 let title;
 

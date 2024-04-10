@@ -1,5 +1,5 @@
 export default interface Analytics {
-    useId: number; //for future reference
+    userId: number; //for future reference
     totalInvestment: number
     totalDays: number
     totalWeekends: number
@@ -20,4 +20,13 @@ export default interface Analytics {
     profitMakingDays: number
     lossMakingDays: number
     dateWiseProfit: { date: string, pnl: number }[]
+    investmentList: Investment[]
+}
+
+export interface Investment {
+    id: number
+    instrument: string
+    investedAmount: number
+    investmentDate: string
+    userId: string
 }

@@ -13,9 +13,14 @@ import {
 import Login from './routes/login/login.tsx';
 import PublishArticle from './routes/publish/publishArticle.tsx';
 import ErrorPage from './routes/error/error.tsx';
+import Setup from './routes/setup/Setup.tsx'
 
 
 const router = createBrowserRouter([
+  {
+    path: "/setup",
+    element: <Setup />,
+  },
   {
     path: "/login",
     element: <Login />,
