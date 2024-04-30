@@ -33,13 +33,6 @@ interface Filters {
 
 export default function NotesPage() {
     const { data: notes, error, loading, refresh } = useFetch<Note[]>(backendUrls.notes.allNotes)
-
-    // const [selectedFilters, setselectedFilters] = useState<Filters>({
-    //     tags: [],
-    //     categories: [],
-    //     keyWords: [],
-    // })
-
     const [sort, setSort] = useState<SORT>("DESC");
 
     const [editNote, setEditNoteContent] = useState<Note | null>({} as Note);

@@ -1,35 +1,26 @@
 "use client"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 import { useToast } from "@/components/ui/use-toast"
-
-
-import axios, { AxiosError } from "axios";
-
 import {
     Dialog,
-    DialogClose,
+    
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import React, { ChangeEvent, FormEvent, ReactElement, useContext, useEffect, useRef, useState } from "react"
+import React, { ReactElement, useState } from "react"
 import useFetch from "@/hooks/useFetch"
 import SetupsAndInstruments from "@/models/trade/SetupsAndInstruments"
 import backendUrls from "@/constants/backendUrls"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { SettingsContext } from "@/context/SettingsContext";
-import { Popover } from "@/components/ui/popover";
-import { PopoverContent } from "@radix-ui/react-popover";
 import { z, ZodType } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"

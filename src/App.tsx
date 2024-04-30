@@ -27,8 +27,8 @@ function App() {
   }, [])
 
   return <SettingsContextProvider>
-    <div className={"flex flex-col h-screen md:flex-row min-h-screen max-h-screen "}>
-      <aside className='flex-none z-10 hidden md:block py-3 px-2 md:w-[20%] md:min-h-full md:max-h-full lg:py-10 bg-main'>
+    <div className={"flex flex-col h-screen md:flex-row min-h-screen max-h-screen divide-x"}>
+      <aside className='flex-none z-10 hidden md:block py-3 px-0 md:w-[20%] md:min-h-full md:max-h-full lg:py-3 bg-background'>
         <SideBar />
       </aside>
       <Navbar className={"flex-none z-10 md:hidden h-16 py-3 px-4 w-full mx-auto bg-main flex flex-row justify-between"} />

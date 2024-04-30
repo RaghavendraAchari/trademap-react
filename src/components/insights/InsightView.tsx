@@ -112,7 +112,7 @@ export default function InsightView({ insight, openDrawer, setOpenDrawer, closeW
 
     const onDeleteClicked = async () => {
         try {
-            const respone = await axios.delete<boolean>(backendUrls.insights.allInsights, {
+            const respone = await http.delete<boolean>(backendUrls.insights.allInsights, {
                 params: {
                     id: insight.id
                 }

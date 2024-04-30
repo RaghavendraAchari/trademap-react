@@ -24,7 +24,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 export default function PendingDays({ days, error, loading, setForDate, forDate, className, ...props }: Props) {
 
     return <div className={cn(className)} {...props}>
-        <div className="flex-none flex flex-row justify-between align-center mb-2 bg-transparent">
+        <div className="flex-none flex flex-row justify-between align-center mb-2 bg-transparent px-3">
             <h3 className="text-lg font-bold bg-transparent">Pending Days:</h3>
         </div>
 
@@ -36,19 +36,17 @@ export default function PendingDays({ days, error, loading, setForDate, forDate,
                 : <>
                     {
                         days && days.length === 0
-                            ? <div>
+                            ? <div className="px-3">
                                 <Alert variant={"default"} className="mt-2 text-muted-foreground">
                                     <BadgeCheckIcon opacity={0.7} />
                                     <AlertTitle>No pending days</AlertTitle>
                                     <AlertDescription>You don't have any pending days</AlertDescription>
                                 </Alert>
                             </div>
-                            : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 ">
+                            : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 px-3">
                                 {days?.map((date, index) => {
-
-
                                     return <Card className="my-2 hover:shadow" key={index} >
-                                        <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-slate-100" : "")}>
+                                        <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-main-extrafade" : "")}>
                                             <p className="text-sm font-medium self-center">{format(new Date(date), "eee, dd-MMM-yyyy")} </p>
                                             <Button className="w-fit text-sm m-0" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>
                                         </CardHeader>

@@ -76,12 +76,17 @@ module.exports = {
         "spin": {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(360deg)" }
+        },
+        "up": {
+          from: { transform: "translateY(0px)" },
+          to: { transform: "translateY(-5px)" }
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "spin": "spin 1s ease-in-out"
+        "spin": "spin 1s ease-in-out",
+        "up": "up 0.3s ease-out forwards"
       },
     },
   },

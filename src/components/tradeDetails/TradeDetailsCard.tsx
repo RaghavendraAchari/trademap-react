@@ -45,11 +45,12 @@ export default function TradeDetailsCard({ trade, showFullDate, showOptions = fa
         </Card>
     }
 
-    return <Card className="mt-2">
+    return <Card className="mt-2 divide-y">
         <CardHeader className="p-2 md:p-6 md:py-2 flex flex-row items-center justify-start space-y-0 space-x-1">
             <InstrumentTypeLogo trade={trade} />
             <CardTitle className="flex flex-row justify-between items-center grow">
-                <span className="text-sm md:text-lg">{"Trade No: " + trade.id} ({trade.setupName})</span>
+                <span className="text-sm md:text-lg flex flex-row items-center">{trade.setupName} </span>
+                {/* <span className="text-start text-muted-foreground text-xs self-baseline ml-1 mt-1">( {trade.id} )</span> */}
                 <div className="flex flex-row items-center space-x-1">
                     <span className="text-xs text-right md:text-sm text-slate-500">{showFullDate ? getFullDateTime(new Date(trade.dateTime)) : getTimeIn12HrFormat(new Date(trade.dateTime))}</span>
                     {showOptions && <div>
@@ -65,9 +66,10 @@ export default function TradeDetailsCard({ trade, showFullDate, showOptions = fa
                 </div>
             </CardTitle>
         </CardHeader>
-        <CardContent className="p-2 md:p-6 md:pt-0 space-y-2 space-x-1 flex flex-row justify-between overflow-y-auto bg-slate-50">
+        <CardContent className="p-2 md:p-6 md:pt-0 space-y-2 space-x-1 flex flex-row justify-between overflow-y-auto ">
             <div className="w-10 h-10 flex-none"></div>
             <div className="grow space-y-2">
+                <p className="text-muted-foreground text-sm font-semibold underline underline-offset-[6px]">Remarks:</p>
                 <div className="text-sm text-slate-700 py-2 whitespace-pre-wrap">{trade.remarks}</div>
                 <div className="flex justify-start space-x-1 items-center text-xs font-medium">
                     <span className="bg-orange-200 p-1 rounded-sm ">{trade.instrumentType}</span>
@@ -76,7 +78,7 @@ export default function TradeDetailsCard({ trade, showFullDate, showOptions = fa
                 </div>
                 <div className="flex flex-row justify-between">
                     <p className="text-xs text-slate-600 font-semibold self-center justify-center">{trade.imagePaths.length.toString() + " image(s)"}</p>
-                    <Button size={"sm"} variant={"outline"} className="cursor-pointer flex flex-row justify-end  space-x-1 items-center  select-none py-0 px-4" onClick={() => setShowImages(prev => !prev)}>
+                    <Button size={"sm"} variant={"link"} className="cursor-pointer flex flex-row justify-end  space-x-1 items-center  select-none py-0 px-4" onClick={() => setShowImages(prev => !prev)}>
                         {
                             !showImages ?
                                 <><Label className="cursor-pointer text-xs font-semibold text-slate-600" htmlFor="arrow-down p-0" >Show Images</Label>

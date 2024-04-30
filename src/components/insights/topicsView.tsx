@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import http from "@/hooks/axiosConfig"
 
 export default function TopicsView({ data, onDataSubmit, onItemClick, selectedItem }: { data: Insight[] | null, onDataSubmit: () => void, onItemClick: (item: Insight) => void, selectedItem?: Insight }) {
 
@@ -38,7 +39,7 @@ export default function TopicsView({ data, onDataSubmit, onItemClick, selectedIt
             insightType: insightType
         }
 
-        axios.post(backendUrls.insights.allInsights, insight)
+        http.post(backendUrls.insights.allInsights, insight)
             .then(res => {
                 toast({
                     title: "Insight added successfully."

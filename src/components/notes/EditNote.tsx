@@ -16,6 +16,7 @@ import axios from "axios";
 import backendUrls from "@/constants/backendUrls";
 import { useToast } from "@/components/ui/use-toast";
 import { format } from "date-fns";
+import http from "@/hooks/axiosConfig";
 
 interface Props {
     note: Note,
@@ -56,7 +57,7 @@ export default function EditNote({ note, onSave }: Props) {
         console.log(note);
 
         try {
-            const res = await axios.post(backendUrls.notes.allNotes, note)
+            const res = await http.post(backendUrls.notes.allNotes, note)
             if (res.status === 200) {
                 toast({ title: "Note save successfully." })
                 reset()

@@ -1,4 +1,4 @@
-import { Settings, Terminal, ThumbsDown, ThumbsDownIcon } from "lucide-react";
+import { Settings, Settings2Icon, Terminal, ThumbsDown, ThumbsDownIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogClose, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -40,9 +40,9 @@ export default function SettingsWindow() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <div>
-                    <Button className='text-slate-300 space-x-2 border-0 hidden md:flex' variant={"ghost"} size={"default"}><Settings /> <span>Settings</span></Button>
+                    <Button className='text-slate-800 space-x-2 border-0 hidden md:flex' variant={"ghost"} size={"default"}><Settings2Icon /> <span>Settings</span></Button>
 
-                    <Button className='text-main space-x-2 flex md:hidden border' variant={"outline"} size={"default"}><Settings /> <span>Settings</span></Button>
+                    <Button className='text-main space-x-2 flex md:hidden border' variant={"outline"} size={"default"}><Settings2Icon /> <span>Settings</span></Button>
                 </div>
             </DialogTrigger>
             <DialogContent>

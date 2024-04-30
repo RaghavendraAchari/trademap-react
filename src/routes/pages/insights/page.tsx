@@ -49,7 +49,9 @@ export default function Insights() {
                             setOpenDrawer={setOpenDrawer}
                             insight={selectedItem}
                             refresh={refresh}
-                            onInsightDeleted={() => setSelectedItem(undefined)}
+                            onInsightDeleted={() => {
+                                setSelectedItem(undefined)
+                            }}
                             onContentUpdated={(updatedInsight: Insight) => {
                                 setSelectedItem(undefined)
                                 refresh();

@@ -1,8 +1,9 @@
 import { toast } from "@/components/ui/use-toast";
 import backendUrls from "@/constants/backendUrls";
+import http from "@/hooks/axiosConfig";
 import useFetchSettings from "@/hooks/settings/useFetchSettings";
 import Settings from "@/models/settings/settings.model";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { HtmlHTMLAttributes, createContext } from "react";
 
 interface SettingsContextModel {
@@ -19,7 +20,7 @@ export default function SettingsContextProvider({ children }: HtmlHTMLAttributes
 
     const onSettingsSubmit = (dataObject: Settings) => {
         if (notFound && data === null) {
-            axios.post(backendUrls.settings, dataObject)
+            http.post(backendUrls.settings, dataObject)
                 .then((res) => {
 
                     toast({
@@ -33,7 +34,7 @@ export default function SettingsContextProvider({ children }: HtmlHTMLAttributes
                     }
                 }).then(() => refresh())
         } else {
-            axios.put(backendUrls.settings, dataObject)
+            http.put(backendUrls.settings, dataObject)
                 .then((res) => {
                     toast({
                         title: "Settings updated successfully."

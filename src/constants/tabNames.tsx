@@ -3,7 +3,7 @@ import { HomeIcon, LibrarySquareIcon, LightbulbIcon, MessageSquareTextIcon, Micr
 
 interface TabDetails {
     url: string,
-    type?: "INTRADAY" | "SWING" | undefined
+    type?: "INTRADAY" | "SWING" | "STUDY"
     tabName: string,
     icon: ReactElement,
     subTabs?: TabDetails[] 
@@ -14,41 +14,41 @@ const tabs: TabDetails[] = [
         url: "/home",
         type: "INTRADAY",
         tabName: "Dashboard",
-        icon: <HomeIcon size={24} />,
+        icon: <HomeIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up " />,
     },
     {
         url: "/home/allTrades/",
         type: "INTRADAY",
         tabName: "All Trades",
-        icon: <LibrarySquareIcon size={24} />
+        icon: <LibrarySquareIcon size={24} className="text-main  group-hover:animate-up group-[.selected]:animate-up" />
 
     },
     {
         url: "/home/swing/",
         type: "SWING",
         tabName: "Swing Trade",
-        icon: <SquareArrowUpIcon size={24} />
+        icon: <SquareArrowUpIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },
     {
         url: "/home/notes/",
-        type: undefined,
+        type: "STUDY",
         tabName: "Personal Notes",
-        icon: <MessageSquareTextIcon size={24} />
+        icon: <MessageSquareTextIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },
     {
         url: "/home/insights/",
-        type: undefined,
+        type: "STUDY",
         tabName: "Insights on setups",
-        icon: <LightbulbIcon size={24} />
+        icon: <LightbulbIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },
     {
         url: "/home/analytics/",
-        type: undefined,
+        type: "STUDY",
         tabName: "Analytics",
-        icon: <MicroscopeIcon size={24} />
+        icon: <MicroscopeIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },
 ]

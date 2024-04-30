@@ -84,7 +84,7 @@ export default function NoTradingDayForm({ forDate, onDataSubmit }: Props) {
     }
 
     return <>
-        <form className="mt-4 space-y-1 flex flex-col md:flex-row md:space-y-0 p-2 bg-slate-100 rounded border md:justify-between md:items-center" onSubmit={(e) => { handleSubmit(e) }}>
+        <form className="mt-4 space-y-1 flex flex-col md:flex-row md:space-y-0 p-2 bg-main-extrafade rounded border md:justify-between md:items-center" onSubmit={(e) => { handleSubmit(e) }}>
         <div className="items-top flex space-x-2">
                 <Checkbox className="bg-white" name="noTradingDay" id="noTradingDay" checked={state === "NoTradingDay"} onClick={() => {
                 setState(prev => prev === "NoTradingDay" ? null : "NoTradingDay")
@@ -123,7 +123,9 @@ export default function NoTradingDayForm({ forDate, onDataSubmit }: Props) {
     </form>
         {
             state === "Holiday" || state === "NoTradingDay"
-                ? <Textarea className="mt-2" onChange={(e) => setRemarks(e.target.value)} value={remarks} rows={3} placeholder="Remarks if any..."></Textarea>
+                ? <div className="pt-2">
+                    <Textarea className="" onChange={(e) => setRemarks(e.target.value)} value={remarks} rows={3} placeholder="Remarks if any..."></Textarea>
+                </div>
                 : null
         }
     </>

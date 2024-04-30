@@ -38,7 +38,7 @@ export default function DashBoard() {
             onDataSubmit={onDataSubmit} />
 
         <PendingDays
-            className="grow flex flex-col w-full lg:flex-grow lg:w-[30%] bg-background p-3"
+            className="grow flex flex-col w-full lg:flex-grow lg:w-[30%] bg-background py-3"
             days={pendingDaysList}
             loading={pendingDaysLoading}
             error={pendingDaysError}

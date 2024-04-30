@@ -16,6 +16,8 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { format } from "date-fns";
 
 export default function AllTrades() {
     // const [pageNumber, setPageNumber] = useState(0)
@@ -43,7 +45,15 @@ export default function AllTrades() {
         <div className="grow h-full flex flex-col md:overflow-y-auto">
             <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
                 <span>Trades</span>
-                <div className="flex flex-row space-x-1">
+                <div className="flex flex-row space-x-1 w-full justify-end">
+                    <div className="flex flex-row items-center space-x-1">
+                        <span className="whitespace-nowrap text-sm font-medium">Go to date:</span>
+                        <Input className="font-medium" type="date" max={format(new Date(), "yyyy-MM-dd")} defaultValue={format(new Date(), "yyyy-MM-dd")} onChange={(e) => {
+                            const element = document.getElementById(format(new Date(e.target.value), "dd MMM yyyy"));
+
+                            element?.scrollIntoView({ behavior: "smooth" });
+                        }} />
+                    </div>
                     <SortByDate sort={sort} setSort={setSort} />
                     <DropdownMenu open={filtersOpen} onOpenChange={setFiltersOpen} >
                         <DropdownMenuTrigger asChild className="cursor-pointer ml-1 md:hidden block">
@@ -97,7 +107,7 @@ export default function AllTrades() {
                     fetchingData === false && trades && trades.length > 0
                         ? <div className="md:grid md:grid-cols-8 gap-1 divide-x overflow-y-auto">
                             <ScrollArea className="col-span-6 max-h-full overflow-y-auto md:pr-3">
-                                <TradeDetailsList tradesList={trades} showFullDate={true} />
+                                <TradeDetailsList tradesList={trades} showFullDate={true} groupBydate={true} />
                                 <DotIcon className="self-center mx-auto opacity-50 w-10 h-10" />
                             </ScrollArea>
 
@@ -128,7 +138,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
     let showOnlyTrades = filters.showWeekend === false && filters.showHoliday === false && filters.showWeekend === false;
 
     return <div className={cn("col-span-2 p-2 max-h-full overflow-auto md:block hidden", className)}>
-        <h3 className="font-medium text-muted-foreground border-b px-2 py-1">Filters:</h3>
+        <h3 className="text-sm font-medium text-muted-foreground border-b px-2 py-1">Filters:</h3>
         <div className="flex space-x-1 items-center p-2">
             <Checkbox
                 id="holiday"
@@ -185,7 +195,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
             <Label className="cursor-pointer" htmlFor="showOnlyTrades">Only show trades</Label>
         </div>
 
-        <h3 className="text-md mt-4">Instrument Type:</h3>
+        <h3 className="text-sm font-medium text-muted-foreground border-b px-2 py-1 mt-5">Instrument Type:</h3>
         <Separator />
         <div className="flex space-x-1 items-center p-2">
             <Checkbox
@@ -226,6 +236,51 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
                 }}
             />
             <Label className="cursor-pointer" htmlFor="commodity">Commodity</Label>
+        </div>
+
+        {/* Result type filter */}
+
+        <h3 className="text-sm font-medium text-muted-foreground border-b px-2 py-1 mt-5">Result Type:</h3>
+        <Separator />
+        <div className="flex space-x-1 items-center p-2">
+            <Checkbox
+                id="Target"
+                name="Target"
+                checked={filters.instrumentType.stock}
+                onCheckedChange={(checked: boolean) => {
+                    setFilters(state => {
+                        return { ...state, instrumentType: { ...state.instrumentType, stock: checked } }
+                    })
+                }}
+            />
+            <Label className="cursor-pointer" htmlFor="Stock">Target / Partial Target</Label>
+        </div>
+
+        <div className="flex space-x-1 items-center p-2">
+            <Checkbox
+                id="SL"
+                name="SL"
+                checked={filters.instrumentType.index}
+                onCheckedChange={(checked: boolean) => {
+                    setFilters(state => {
+                        return { ...state, instrumentType: { ...state.instrumentType, index: checked } }
+                    })
+                }}
+            />
+            <Label className="cursor-pointer" htmlFor="Index">SL / Partial SL</Label>
+        </div>
+        <div className="flex space-x-1 items-center p-2">
+            <Checkbox
+                id="CTC"
+                name="CTC"
+                checked={filters.instrumentType.commodity}
+                onCheckedChange={(checked: boolean) => {
+                    setFilters(state => {
+                        return { ...state, instrumentType: { ...state.instrumentType, commodity: checked } }
+                    })
+                }}
+            />
+            <Label className="cursor-pointer" htmlFor="commodity">Cost To Cost (CTC)</Label>
         </div>
         <div className="flex space-x-1 items-center justify-end p-2">
             <Button variant={"outline"} size={"sm"} onClick={() => setFilterState(filters)}>Apply Filters</Button>

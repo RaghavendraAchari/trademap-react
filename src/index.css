@@ -27,8 +27,8 @@
 
 
     --primary-color: #39187e;
-    --primary-color-fade: #5027a4;
-    --primary-color-extrafade: #d8d0e814;
+    --primary-color-fade: #DECEFF;
+    --primary-color-extrafade: #ede4ff;
   }
  
   .dark {
@@ -55,7 +55,7 @@
 
     --primary-color: #39187e;
     --primary-color-fade: #5027a4;
-    --primary-color-extrafade: #d8d0e814;
+    --primary-color-extrafade: #ede4ff;
   }
 }
  
