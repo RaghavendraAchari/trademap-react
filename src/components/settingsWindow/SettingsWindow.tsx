@@ -50,7 +50,7 @@ export default function SettingsWindow() {
                     <DialogTitle>Settings</DialogTitle>
                     <DialogDescription>All the settings for the app</DialogDescription>
                 </DialogHeader>
-                <form onSubmit={(e) => onSettingsSubmit(e)} className='flex flex-col space-y-3'>
+                <form onSubmit={(e) => onSettingsSubmit(e)} className='flex flex-col space-y-6'>
                     {
                         settingsContext?.notFound === true ?
                             <Alert className="text-sm mb-5 space-x-1 bg-pink-50 border-2 border-pink-200" variant={"default"}>
@@ -68,7 +68,7 @@ export default function SettingsWindow() {
                         </div>
                     </div>
 
-                    <div className="group flex items-start justify-between mt-10">
+                    <div className="group flex items-start justify-between">
                         <Label className='w-full flex flex-col space-y-1' htmlFor='maxTradesWarning'>
                             <span>Warn me when trade limit is reached</span>
                             <span className='text-xs text-slate-500'>Displays a banner in the dashboard when max trades are taken</span>
@@ -84,7 +84,7 @@ export default function SettingsWindow() {
                         <Switch name="maxTradesWarning" defaultChecked={settingsContext?.data?.warnWhenMaxLimitReached} id='maxTradesWarning' />
                     </div>
 
-                    <div className="group flex items-start justify-between mt-10">
+                    <div className="group flex items-start justify-between">
                         <Label className='w-full flex flex-col space-y-1' htmlFor='disableButton'>
                             <span>Disable the " + Add new trade" button when limit reached</span>
                             <span className='text-xs text-slate-500'>You will not be able to add new trades when trade limit per day is reached</span>
@@ -92,7 +92,7 @@ export default function SettingsWindow() {
                         <Switch name="disableButton" defaultChecked={settingsContext?.data?.disableButton} id='disableButton' />
                     </div>
 
-                    <div className="group flex flex-col space-y-1 mt-10">
+                    <div className="group flex flex-col space-y-1">
                         <Label htmlFor='date'>Set tracking date :</Label>
                         <div className='flex flex-row items-center justify-between space-x-1'>
                             <Input name="date" type='date' id='date' defaultValue={settingsContext?.data?.trackingDate} placeholder='Enter a number' />

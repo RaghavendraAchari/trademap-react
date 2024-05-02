@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
+import DatePicker from "@/components/ui/DatePicker";
 
 export default function AllTrades() {
     // const [pageNumber, setPageNumber] = useState(0)
@@ -45,11 +46,12 @@ export default function AllTrades() {
         <div className="grow h-full flex flex-col md:overflow-y-auto">
             <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
                 <span>Trades</span>
-                <div className="flex flex-row space-x-1 w-full justify-end">
+                <div className="flex flex-row space-x-4 w-full justify-end">
                     <div className="flex flex-row items-center space-x-1">
                         <span className="whitespace-nowrap text-sm font-medium">Go to date:</span>
-                        <Input className="font-medium" type="date" max={format(new Date(), "yyyy-MM-dd")} defaultValue={format(new Date(), "yyyy-MM-dd")} onChange={(e) => {
-                            const element = document.getElementById(format(new Date(e.target.value), "dd MMM yyyy"));
+
+                        <DatePicker onChange={(date) => {
+                            const element = document.getElementById(format(date, "dd MMM yyyy"));
 
                             element?.scrollIntoView({ behavior: "smooth" });
                         }} />
@@ -106,7 +108,7 @@ export default function AllTrades() {
                 {
                     fetchingData === false && trades && trades.length > 0
                         ? <div className="md:grid md:grid-cols-8 gap-1 divide-x overflow-y-auto">
-                            <ScrollArea className="col-span-6 max-h-full overflow-y-auto md:pr-3">
+                            <ScrollArea className="col-span-6 max-h-full overflow-y-auto md:pr-3 scroll-smooth">
                                 <TradeDetailsList tradesList={trades} showFullDate={true} groupBydate={true} />
                                 <DotIcon className="self-center mx-auto opacity-50 w-10 h-10" />
                             </ScrollArea>
