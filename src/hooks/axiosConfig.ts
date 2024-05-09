@@ -4,7 +4,7 @@ import axios from "axios";
 const http = axios.create();
 
 http.interceptors.request.use((config) => {
-    const token = sessionStorage.getItem("token")
+    const token = sessionStorage.getItem("accessToken")
 
     config.headers.Authorization = `Bearer ${token}`
 

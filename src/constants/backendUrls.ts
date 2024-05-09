@@ -21,6 +21,7 @@ const analytics = baseUrl + "/analytics"
 const users = baseUrl + "/users"
 
 const investmentDetails = baseUrl + "/investmentdetails"
+const dailyNote = baseUrl + "/dailyNote"
 
 export default {
     baseUrl: baseUrl,
@@ -47,9 +48,14 @@ export default {
     users: {
         allUsers: users,
         create: users + "/create",
+        login: users + "/login",
         validate: users + "/validate"
     },
-    investmentDetails
+    investmentDetails,
+    dailyNote: {
+        allNotes: dailyNote,
+        todaysNote: dailyNote + "/today"
+    }
 }
 
 function getImageDownloadablePath(path: string) {

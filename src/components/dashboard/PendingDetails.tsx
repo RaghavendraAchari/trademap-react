@@ -29,43 +29,44 @@ export default function PendingDays({ days, error, loading, setForDate, forDate,
         </div>
 
         <Separator />
+        {loading ? <Loading /> : null}
 
-        {
-            loading
-                ? <Loading />
-                : <>
+        <div className="md:grow overflow-y-auto md:max-h-[100%] mb-2 p-1 px-3">
+            {
+                !loading && days
+                    ? <>
                     {
-                        days && days.length === 0
-                            ? <div className="px-3">
-                                <Alert variant={"default"} className="mt-2 text-muted-foreground">
-                                    <BadgeCheckIcon opacity={0.7} />
-                                    <AlertTitle>No pending days</AlertTitle>
-                                    <AlertDescription>You don't have any pending days</AlertDescription>
-                                </Alert>
-                            </div>
-                            : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 px-3">
-                                {days?.map((date, index) => {
-                                    return <Card className="my-2 hover:shadow" key={index} >
-                                        <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-main-extrafade" : "")}>
-                                            <p className="text-sm font-medium self-center">{format(new Date(date), "eee, dd-MMM-yyyy")} </p>
-                                            <Button className="w-fit text-sm m-0" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>
-                                        </CardHeader>
-                                    </Card>
-                                })}
-                            </div>
+                            days.length === 0
+                                ? <div className="px-0">
+                                    <Alert variant={"default"} className="mt-1 text-muted-foreground">
+                                        <BadgeCheckIcon opacity={0.7} />
+                                        <AlertTitle>No pending days</AlertTitle>
+                                        <AlertDescription>You don't have any pending days</AlertDescription>
+                                    </Alert>
+                                </div>
+                                : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 px-3">
+                                    {days?.map((date, index) => {
+                                        return <Card className="my-2 hover:shadow" key={index} >
+                                            <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-main-extrafade" : "")}>
+                                                <p className="text-sm font-medium self-center">{format(new Date(date), "eee, dd-MMM-yyyy")} </p>
+                                                <Button className="w-fit text-sm m-0" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>
+                                            </CardHeader>
+                                        </Card>
+                                    })}
+                                </div> 
                     }
                 </>
-
-        }
-        {
-            !loading && error && <PendingDaysError />
-        }
-
+                    : null
+            }
+            {
+                !loading && error && <PendingDaysError />
+            }
+        </div>
     </div>
 }
 
 function PendingDaysError() {
-    return <Alert variant={"destructive"}>
+    return <Alert className="" variant={"destructive"}>
         <Terminal size={"16px"} />
         <AlertTitle>Oops..</AlertTitle>
         <AlertDescription>Something went wrong while petching the pending days.</AlertDescription>

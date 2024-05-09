@@ -220,7 +220,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
         }
     }
 
-    return <div className="">
+    return <div className="px-2">
         <Dialog open={formOpen} onOpenChange={setFormOpen}>
             <DialogTrigger asChild >
                 <Button disabled={disabled} className="justify-self-center w-fit " variant={"outline"}>+ Add new trade details</Button>

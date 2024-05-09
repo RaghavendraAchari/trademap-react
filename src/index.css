@@ -79,6 +79,12 @@
   
 }
 
+@layer components {
+  .image-rendering{
+      image-rendering: crisp-edges;
+  }
+}
+
 .label-distance {
   @apply space-y-1;
 }

@@ -6,7 +6,7 @@ import Navbar from './components/commons/NavBar';
 import DisplayHeader from './components/commons/DisplayHeader';
 import { Toaster } from './components/ui/toaster';
 import Home from './routes/pages/dashboard/page';
-import AllTrades from './routes/pages/allTrades/page';
+import Page from './routes/pages/allTrades/page';
 import NotesPage from './routes/pages/notes/page';
 import Analytics from './routes/pages/analytics/page';
 import Insights from './routes/pages/insights/page';
@@ -19,7 +19,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const tokenData = sessionStorage.getItem("token");
+    const tokenData = sessionStorage.getItem("accessToken");
 
     if (tokenData === null) {
       return navigate("/login")
@@ -36,7 +36,7 @@ function App() {
         <DisplayHeader className='flex-none bg-background p-3' />
 
         <Routes>
-          <Route path='/alltrades/*' element={<AllTrades />} />
+          <Route path='/alltrades/*' element={<Page />} />
           <Route path='/notes/' element={<NotesPage />} />
           <Route path='/insights/' element={<Insights />} />
           <Route path='/analytics/' element={<Analytics />} />

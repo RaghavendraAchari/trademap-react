@@ -2,11 +2,13 @@ import { CredentialResponse, GoogleLogin, useGoogleLogin, useGoogleOneTapLogin }
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import backendUrls from "@/constants/backendUrls";
 import http from "@/hooks/axiosConfig";
 import { isMobile } from "react-device-detect";
 import { addMinutes, format } from "date-fns";
+import { toast } from "sonner"
+import { Toaster } from "@/components/ui/sonner"
 
 const client_id = process.env.CLIENT_ID || "";
 
@@ -15,8 +17,9 @@ export default function Login() {
     const navigate = useNavigate();
     const [sessionExpired, setSessionExpired] = useState(false);
 
+
     useEffect(() => {
-        if (sessionStorage.getItem('token')) {
+        if (sessionStorage.getItem('accessToken')) {
             setShowLoginForm(false)
 
             navigate("/");
@@ -25,28 +28,29 @@ export default function Login() {
 
     const onLogin = async (response: CredentialResponse) => {
         console.log(response);
-        sessionStorage.clear();
-        sessionStorage.setItem("token", response.credential as string);
 
-        sessionStorage.setItem("startTime", addMinutes(new Date(), 59).getTime().toString());
+        sessionStorage.clear();
+        sessionStorage.setItem("idtoken", response.credential as string);
 
         if (sessionExpired === true) {
             setSessionExpired(false)
         }
 
-        http.post(backendUrls.users.create, null, {
-            headers: {
-                Authorization: "Bearer " + response.credential
-            }
-        }).then(res => {
-            navigate("/");
-        }).catch((err: AxiosError) => {
-            if (err.response?.status === 409) {
+        axios.post(backendUrls.users.login, response.credential)
+            .then(res => {
+                sessionStorage.setItem("accessToken", res.data.accessToken);
+                sessionStorage.setItem("refreshToken", res.data.refreshToken);
 
-            } else {
+                if (res.data === "SETUP") {
+                    return navigate("/setup")
+                }
 
-            }
-            navigate("/");
+                return navigate("/");
+            })
+            .catch((err: AxiosError) => {
+                console.log(err);
+
+                toast("Error in loggin in!")
         })
     }
 
@@ -54,6 +58,7 @@ export default function Login() {
 
 
     return <GoogleOAuthProvider clientId={client_id}>
+        <Toaster />
         <div className="flex items-center justify-center h-dvh w-dvw overflow-hidden">
             <img src="/login-bg.jpg" alt="background" className="object-contain max-w-full blur-[2px] opacity-50" />
 

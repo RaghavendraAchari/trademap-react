@@ -27,6 +27,8 @@ export default function DatePicker({ onChange }: { onChange: (date: Date) => voi
 
                 <Calendar
                     mode="single"
+                    today={new Date()}
+                    showOutsideDays={true}
                     selected={date}
                     onSelect={(date) => {
                         setDate(date);
@@ -34,6 +36,7 @@ export default function DatePicker({ onChange }: { onChange: (date: Date) => voi
                         date && onChange(date)
                     }}
                     initialFocus
+                    toDate={new Date()}
                 />
             </PopoverContent>
         </Popover>

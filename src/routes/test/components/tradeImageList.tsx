@@ -34,9 +34,9 @@ export default function TradeImageList({ trade }: { trade: Trade }) {
     return <>
 
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="min-w-fit max-w-fit max-h-[50vh] " asChild>
+            <DialogTrigger className="min-w-fit max-w-fit max-h-[50vh]" asChild>
                 <div className="flex flex-row gap-1 flex-wrap">
-                    {trade.imagePaths.map((image, index) => <ImageWithLoader className="bg-background h-32 p-1 w-64 object-contain rounded-md border hover:shadow" onClick={() => {
+                    {trade.imagePaths.map((image, index) => <ImageWithLoader className="bg-background h-32 p-1 w-64 object-contain rounded-md border hover:shadow cursor-pointer" onClick={() => {
                         setSelectedIndex(index)
                     }} key={index} path={image} />)}
                 </div>
@@ -89,7 +89,7 @@ function ImageWithLoader({ path, onClick, className }: { className?: string, pat
             onLoad={() => {
                 setLoading(false)
             }}
-            className={"w-full h-full aspect-video object-contain " + (!loading ? "block" : "hidden")} src={backendUrls.tradeDetails.getImageDownloadablePath(path)} alt="path" />}
+            className={"w-full h-full  aspect-video object-none image-rendering" + (!loading ? "block" : "hidden")} src={backendUrls.tradeDetails.getImageDownloadablePath(path)} alt="path" />}
     </div>
 
 }

@@ -65,9 +65,7 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
                     : null
             }
             {
-                !loading && error
-                    ? <TradeDetailsError />
-                    : null
+                !loading && error && <div className="p-1 px-2"><TradeDetailsError /></div>
             }
         </div>
 

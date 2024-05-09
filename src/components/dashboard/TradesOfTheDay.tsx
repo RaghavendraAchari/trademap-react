@@ -8,6 +8,7 @@ import { ScrollArea } from "../ui/scroll-area"
 import { Dialog, DialogTrigger } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { useNavigate } from "react-router-dom"
+import { compareDesc } from "date-fns"
 
 
 interface Propps {
@@ -21,7 +22,9 @@ export default function TradesOfTheDay({ trades, forDate, onDataSubmit, maxTrade
 
     if (trades[0].isHoliday === true || trades[0].noTradingDay == true || trades[0].isWeekend == true)
         return <NoTradeDayBanner trade={trades[0]} />
-    else
+    else {
+        const sortedTrades = trades.sort((a, b) => compareDesc(new Date(a.dateTime), new Date(b.dateTime)));
+
         return <ScrollArea className="px-[10px]">
             {
                 maxTradeLimit && trades.length >= maxTradeLimit
@@ -29,13 +32,14 @@ export default function TradesOfTheDay({ trades, forDate, onDataSubmit, maxTrade
                     : null
             }
 
-            <TradeDetailsList tradesList={trades} showFullDate={false} showOptions={true} />
+            <TradeDetailsList tradesList={sortedTrades} showFullDate={false} showOptions={true} />
 
             <div className="flex flex-row justify-center py-2 space-x-4 mt-5">
                 <TradeDetailsForm forDate={forDate} onDataSubmit={onDataSubmit} />
                 <TodaysNote />
             </div>
         </ScrollArea>
+    }
 }
 
 export function TodaysNote() {

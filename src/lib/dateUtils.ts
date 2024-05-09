@@ -9,11 +9,11 @@ export function getTimeIn12HrFormat(date: Date) {
     if (date === null || date === undefined)
         return ""
 
-    return format(date, "HH:mm a");
+    return format(date, "h:mm a");
 }
 
 export function getFullDateTime(date: Date) {
-    return format(date, "dd MMM yyyy - HH:mm a");
+    return format(date, "dd MMM yyyy - h:mm a");
 }
 
 export function getFullDateTimeWithMinutes(date: Date) {

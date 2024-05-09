@@ -51,6 +51,10 @@ export default function DisplayHeader({ className, ...props }: Props) {
             title = 'Test'
             description = "Test app components here."
             break;
+        case "/home/allTrades/preview":
+            title = 'Trades Review'
+            description = "Review your trades with details"
+            break;
         default:
             title = 'Dashboard'
             description = "Date and Time: " + dateAsString
@@ -58,42 +62,42 @@ export default function DisplayHeader({ className, ...props }: Props) {
 
     return <div className={cn(className)} {...props}>
         <h1 className='text-3xl font-extrabold opacity-80'>{title}</h1>
-        <p className="font-medium pt-2 flex justify-between" >{description} <RemainingTime /></p>
+        <p className="font-medium pt-2 flex justify-between" >{description} </p>
     </div>
 }
 
-function RemainingTime() {
-    const [time, setTime] = useState("");
-    const navigate = useNavigate();
+// function RemainingTime() {
+//     const [time, setTime] = useState("");
+//     const navigate = useNavigate();
 
-    useEffect(() => {
-        function setTimeDifference() {
-            if (!sessionStorage.getItem("startTime"))
-                return setTime("login")
+//     useEffect(() => {
+//         function setTimeDifference() {
+//             if (!sessionStorage.getItem("startTime"))
+//                 return setTime("login")
 
-            const endTime = new Date(parseInt(sessionStorage.getItem("startTime") as string));
-            const difference = differenceInMinutes(endTime, new Date());
+//             const endTime = new Date(parseInt(sessionStorage.getItem("startTime") as string));
+//             const difference = differenceInMinutes(endTime, new Date());
 
-            if (difference <= 0) {
-                sessionStorage.clear()
+//             if (difference <= 0) {
+//                 sessionStorage.clear()
 
-                navigate("/login")
-            }
+//                 navigate("/login")
+//             }
 
-            setTime(difference.toString() + " minutes")
-        }
+//             setTime(difference.toString() + " minutes")
+//         }
 
-        setTimeDifference();
+//         setTimeDifference();
 
-        const timer = setInterval(() => {
-            setTimeDifference()
-        }, 1000 * 60)
+//         const timer = setInterval(() => {
+//             setTimeDifference()
+//         }, 1000 * 60)
 
-        return () => {
-            clearInterval(timer)
-        }
+//         return () => {
+//             clearInterval(timer)
+//         }
 
-    }, [])
+//     }, [])
 
-    return <span className="text-xs">Remaining session time : {time}</span>;
-}
+//     return <span className="text-xs">Remaining session time : {time}</span>;
+// }

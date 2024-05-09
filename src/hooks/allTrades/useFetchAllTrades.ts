@@ -15,12 +15,7 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
     const navigate = useNavigate();
 
     const fetchData = () => {
-        setLoading(true)
-        const instrumentType: string[] = []
-
-        filters?.instrumentType.stock ? instrumentType.push("STOCK") : null;
-        filters?.instrumentType.index ? instrumentType.push("INDEX") : null;
-        filters?.instrumentType.commodity ? instrumentType.push("COMMODITY") : null; 
+        setLoading(true) 
 
         http.get(url, {
             params: {
@@ -28,10 +23,13 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
                 showHoliday: filters?.showHoliday,
                 showNoTradingDay: filters?.showNoTradingDay,
                 showWeekend: filters?.showWeekend,
-                // instrumentType
+                showStocks: filters?.instrumentType?.stock,
+                showFno: filters?.instrumentType?.index,
+                showCommodity: filters?.instrumentType?.commodity,
+                showTargetOrPartialTarget: filters?.resultType?.targetOrPartialTarget,
+                showSLorPartialSL: filters?.resultType?.SLorPartialSL,
+                showCTC: filters?.resultType?.CTC,
             },
-            // paramsSerializer: serializer
-
         })
             .then(res => {
                 setList(res.data)
@@ -45,8 +43,6 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("token") === null)
-            return navigate("/login")
 
         fetchData()
     }, [sort, filters])

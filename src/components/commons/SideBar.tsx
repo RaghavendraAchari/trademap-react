@@ -1,12 +1,26 @@
 import tabs from '@/constants/tabNames';
 import SettingsWindow from '../settingsWindow/SettingsWindow';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '../ui/button';
+import { UserCircle2Icon } from 'lucide-react';
 
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 
 
 export default function SideBar() {
     const pathname = useLocation().pathname;
+    const navigate = useNavigate();
 
     return <header className='mx-auto bg-background divide-y text-center flex flex-col justify-start h-full space-y-2 '>
         <AppLogo />
@@ -50,7 +64,29 @@ export default function SideBar() {
                 }
             </ul>
             </div>
-            <SettingsWindow />
+            <div >
+                <SettingsWindow />
+                <AlertDialog>
+                    <AlertDialogTrigger asChild><Button className='space-x-2' variant={'ghost'} onClick={() => { }}><UserCircle2Icon /><span>Logout</span></Button></AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure want to logout?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                You will be logged out this app.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => {
+                                sessionStorage.clear();
+                                navigate("/login")
+                            }}>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+
+                {/*  */}
+            </div>
         </nav>
     </header>
 }
