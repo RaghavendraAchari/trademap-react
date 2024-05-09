@@ -20,7 +20,6 @@ export default function DashBoard() {
     const { data: trades, error: tradeError, loading: tradeLoading, refresh: refreshTrades } = useFetch<Trade[]>(url);
     const { data: pendingDaysList, refresh: refreshPendingDays, loading: pendingDaysLoading, error: pendingDaysError } = useFetch<string[]>(backendUrls.tradeDetails.pendingDays);
 
-
     const onDataSubmit = async () => {
         console.log("Data submited");
 
