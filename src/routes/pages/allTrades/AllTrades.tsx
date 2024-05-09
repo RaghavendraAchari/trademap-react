@@ -49,7 +49,7 @@ export default function AllTrades() {
         <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
             <div className="flex flex-row items-center space-x-4">
                 <span>Trades:</span>
-                <Button className="space-x-2" variant={"link"} onClick={() => navigate("/home/allTrades/preview")}>
+                <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview")}>
                     <span>Preview Trades</span>
                     <PlayCircleIcon size={20} />
                 </Button>
@@ -227,7 +227,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
                 name="Index"
                 checked={filters.instrumentType?.index}
                 onCheckedChange={(checked: boolean) => {
-                    setFilters(state => {
+                    setFilters((state) => {
                         return { ...state, instrumentType: { ...state.instrumentType, index: checked } }
                     })
                 }}

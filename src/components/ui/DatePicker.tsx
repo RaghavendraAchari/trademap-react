@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 import { Button } from "./button"
 import { CalendarIcon } from "lucide-react"
@@ -6,8 +6,14 @@ import { format } from "date-fns"
 import { Calendar } from "./calendar"
 import { cn } from "@/lib/utils"
 
-export default function DatePicker({ onChange }: { onChange: (date: Date) => void }) {
-    const [date, setDate] = React.useState<Date>()
+export default function DatePicker({ onChange, defaultdDate }: { onChange: (date: Date) => void, defaultdDate?: Date }) {
+    const [date, setDate] = React.useState<Date | undefined>(defaultdDate ? defaultdDate : undefined)
+
+    console.log(date);
+
+    useEffect(() => {
+        setDate(defaultdDate);
+    }, [defaultdDate])
 
     return (
         <Popover>
@@ -27,7 +33,6 @@ export default function DatePicker({ onChange }: { onChange: (date: Date) => voi
 
                 <Calendar
                     mode="single"
-                    today={new Date()}
                     showOutsideDays={true}
                     selected={date}
                     onSelect={(date) => {

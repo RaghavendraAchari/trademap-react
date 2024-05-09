@@ -12,6 +12,7 @@ import Analytics from './routes/pages/analytics/page';
 import Insights from './routes/pages/insights/page';
 import SettingsContextProvider from './context/SettingsContext';
 import Swing from './routes/pages/swing/swing';
+import ReviewDailyNotes from './routes/pages/reviewDailyNotes/reviewDailyNotes';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path='/insights/' element={<Insights />} />
           <Route path='/analytics/' element={<Analytics />} />
           <Route path='/swing/' element={<Swing />} />
+          <Route path='/reviewdailynotes/' element={<ReviewDailyNotes />} />
           <Route path='*' element={<Home />} />
         </Routes>
 
