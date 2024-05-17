@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { InsightHeader } from "./InsightView"
 import Insight from "../../models/insights/Insight.model";
 import { OutputData } from "@editorjs/editorjs";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import AskForEdit from "./askForEdit";
 import Editor from "@/components/textEditor/editor";
+import Scrollbar from 'smooth-scrollbar';
+
 
 interface Props {
     insight: Insight,
@@ -17,6 +19,10 @@ interface Props {
 
 export default function InsightViewWeb({ insight, editContent, setContentEdit, setEditorData, onDeleteClicked }: Props) {
     let insightContent = insight.content === "" ? {} as OutputData : JSON.parse(insight.content)
+
+    useEffect(() => {
+        Scrollbar.initAll()
+    }, [])
 
     return <>
         <InsightHeader
@@ -31,9 +37,10 @@ export default function InsightViewWeb({ insight, editContent, setContentEdit, s
                 ? <AskForEdit />
                 : <div
                     data-wrapper
+                    data-scrollbar
                     className="md:flex md:flex-col md:w-full items-end space-y-2 p-2">
 
-                    <Editor className="" id={"editor"} data={insightContent} edit={editContent} setData={setEditorData} />
+                    <Editor className="-mt-8" id={"editor"} data={insightContent} edit={editContent} setData={setEditorData} />
 
                     {editContent === true && <Button variant={"outline"} size={"default"} onClick={() => setContentEdit(false)}>Cancel editing</Button>}
                 </div>

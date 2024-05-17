@@ -1,3 +1,4 @@
+import DisplayHeader from "@/components/commons/DisplayHeader";
 import Editor from "@/components/textEditor/editor";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -51,8 +52,9 @@ export default function DialyNote() {
     }
 
 
-    return <div className="w-full flex flex-col items-end justify-start">
-        <h3 className="text-md font-bold p-2 px-3 border-b w-full flex  space-x-5 items-center "><span>Date : {date.toDateString()}</span>
+    return <div className="w-full flex flex-col items-start justify-start divide-y overflow-y-auto">
+        <DisplayHeader className="p-3 flex-none" title="Daily note" description="Write your analysis about today's market." />
+        <h3 className="flex-none text-md font-bold py-1 px-3 border-b w-full flex  space-x-5 items-center "><span>Date : {date.toDateString()}</span>
             <span className="text-muted-foreground text-xs font-normal italic">autosaving data every 5 seconds</span>
             <Button variant={"link"} className="mx-2 w-fit space-x-2 place-self-end" onClick={() => {
                 navigate("/home/")
@@ -70,7 +72,7 @@ export default function DialyNote() {
                     data={data as unknown as OutputData}
                     id="editor-update"
                     setData={onUpdate}
-                    className="p-2 cursor-text grow-0"
+                    className="p-2 cursor-text grow overflow-y-auto"
                     autoSave={false} />
                 : null
         }
