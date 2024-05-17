@@ -29,7 +29,8 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
     return <div data-tradedetails className={cn(className)} {...props}>
         <div className="flex flex-row justify-between align-center mb-2 flex-none px-3">
             <h3 className="text-lg font-bold">Trades:</h3>
-            <div className="flex flex-col justify-end space-y-1 space-x-1 md:flex-none md:flex-row md:justify-end md:space-y-0">
+            <div className="flex flex-col justify-end space-y-1 space-x-2 md:flex-none md:flex-row md:justify-end md:space-y-0">
+                {trades && <TotalTrades trades={trades} />}
                 {trades && <TotalPnL trades={trades} />}
                 <Badge className="mr-2" variant="outline">For: {forDate.toDateString()}</Badge>
 
@@ -98,6 +99,17 @@ function TotalPnL({ trades }: { trades: Trade[] }) {
     </span>
 }
 
+function TotalTrades({ trades }: { trades: Trade[] }) {
+    if (trades && trades.length > 0 && (trades[0].isHoliday || trades[0].noTradingDay || trades[0].isWeekend))
+        return null;
+
+    return <span className="text-xs md:text-sm font-semibold my-auto flex justify-end items-center space-x-1">
+        <span>Total trades :</span>
+        <Badge className={"mr-2 "} variant="default">
+            {trades.length}
+        </Badge>
+    </span>
+}
 
 
 function NoTradesBanner() {

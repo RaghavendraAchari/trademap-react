@@ -5,6 +5,7 @@ import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
+
 //props
 type Props = {
     data?: OutputData;
@@ -69,7 +70,8 @@ export default function Editor({ id, data, setData, edit = false, className, aut
         };
     }, [edit, data]);
 
-    return <div className={cn("grow flex flex-col justify-start items-end min-w-full", className)}>
+    return <div className={cn("grow flex flex-col justify-start items-end min-w-full ", className)}>
+
         <div className="prose max-w-full w-full mt-1 mb-1" id={id} />
 
         {edit === true && <Button variant={"default"} size={"default"} onClick={handleOnSave} >Save</Button>}

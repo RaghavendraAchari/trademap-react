@@ -34,7 +34,7 @@ function App() {
       </aside>
       <Navbar className={"flex-none z-10 md:hidden h-16 py-3 px-4 w-full mx-auto bg-main flex flex-row justify-between"} />
       <main className='flex flex-col grow overflow-y-scroll md:overflow-hidden divide-y'>
-        <DisplayHeader className='flex-none bg-background p-3' />
+
 
         <Routes>
           <Route path='/alltrades/*' element={<Page />} />

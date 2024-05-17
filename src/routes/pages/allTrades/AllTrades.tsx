@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
 import DatePicker from "@/components/ui/DatePicker";
 import { useNavigate } from "react-router-dom";
+import DisplayHeader from "@/components/commons/DisplayHeader";
 
 export default function AllTrades() {
     const [sort, setSort] = useState<SORT>("DESC")
@@ -45,11 +46,13 @@ export default function AllTrades() {
 
     const [filtersOpen, setFiltersOpen] = useState(false);
 
-    return <div className="grow h-full flex flex-col md:overflow-y-auto">
+    return <>
+        <DisplayHeader title="All trades" description="All the trades that you have taken till now." className='flex-none bg-background p-3' />
+        <div className="grow h-full flex flex-col md:overflow-y-auto">
         <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
             <div className="flex flex-row items-center space-x-4">
                 <span>Trades:</span>
-                <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview")}>
+                    <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview", { state: trades })}>
                     <span>Preview Trades</span>
                     <PlayCircleIcon size={20} />
                 </Button>
@@ -134,6 +137,7 @@ export default function AllTrades() {
             }
         </div>
     </div>
+    </>
 }
 
 
@@ -263,7 +267,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
                     })
                 }}
             />
-            <Label className="cursor-pointer" htmlFor="Stock">Target / Partial Target</Label>
+            <Label className="cursor-pointer" htmlFor="Target">Target / Partial Target</Label>
         </div>
 
         <div className="flex space-x-1 items-center p-2">
@@ -277,7 +281,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
                     })
                 }}
             />
-            <Label className="cursor-pointer" htmlFor="Index">SL / Partial SL</Label>
+            <Label className="cursor-pointer" htmlFor="SL">SL / Partial SL</Label>
         </div>
         <div className="flex space-x-1 items-center p-2">
             <Checkbox
@@ -290,7 +294,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
                     })
                 }}
             />
-            <Label className="cursor-pointer" htmlFor="commodity">Cost To Cost (CTC)</Label>
+            <Label className="cursor-pointer" htmlFor="CTC">Cost To Cost (CTC)</Label>
         </div>
         <div className="flex space-x-1 items-center justify-end p-2">
             <Button variant={"outline"} size={"sm"} onClick={() => setFilterState(filters)}>Apply Filters</Button>

@@ -24,11 +24,14 @@ import {
     Cell,
 } from 'recharts';
 import { format } from "date-fns";
+import DisplayHeader from "@/components/commons/DisplayHeader";
 
 export default function Analytics() {
     const { data, error, loading } = useFetchAnalytics(backendUrls.analytics);
 
     return (
+        <>
+            <DisplayHeader title="Analytics" description="Summary of your trading journey." className='flex-none bg-background p-3' />
         <div className='page p-3 space-y-2 overflow-y-scroll w-full'>
 
             {
@@ -160,6 +163,7 @@ export default function Analytics() {
             }
 
         </div>
+        </>
     )
 }
 

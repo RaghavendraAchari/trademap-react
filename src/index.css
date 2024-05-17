@@ -86,7 +86,7 @@
 }
 
 .label-distance {
-  @apply space-y-1;
+  @apply space-y-1 flex-1;
 }
 
 .custom-img{

@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { InfoIcon } from "lucide-react";
+import DisplayHeader from "@/components/commons/DisplayHeader";
 
 
 interface Filters {
@@ -63,7 +64,9 @@ export default function NotesPage() {
         await refresh()
     }
 
-    return <div className='md:flex md:flex-row md:grow md:h-full md:max-h-full md:divide-x overflow-y-visible md:overflow-y-auto' >
+    return <>
+        <DisplayHeader title="Personal Notes" description="All the things that you want to remember in your trading journey." className='flex-none bg-background p-3' />
+        <div className='md:flex md:flex-row md:grow md:h-full md:max-h-full md:divide-x overflow-y-visible md:overflow-y-auto' >
         <div className="w-full px-3 py-2 bg-transparent md:flex md:flex-col  divide-y md:w-[70%] md:h-full md:max-h-full ">
             <div className="flex-none  bg-background text-foreground flex justify-between z-20 ">
                 <h3 className="font-bold py-1">Notes:</h3>
@@ -92,6 +95,7 @@ export default function NotesPage() {
 
 
     </div>
+    </>
 }
 
 function NotesInfoMobileDrawer() {

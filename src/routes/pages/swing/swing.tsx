@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Chart from "./Chart";
 import { useState } from "react";
+import DisplayHeader from "@/components/commons/DisplayHeader";
 
 type Stock = {
     name: string,
@@ -29,7 +30,9 @@ export default function Swing() {
 
     const [timeline, setTimeline] = useState<EditorJS.OutputData>();
 
-    return <div className="md:grid md:grid-cols-[25%_75%] gap-1 p-2 px-3">
+    return <>
+        <DisplayHeader title="Swing Trade" description="Actively monitor and track short term trades." className='flex-none bg-background p-3' />
+        <div className="md:grid md:grid-cols-[25%_75%] gap-1 p-2 px-3">
         <div className="">
             <h3 className="border-b">Watchlist :</h3>
             <div className="space-y-1 mt-2">
@@ -47,4 +50,5 @@ export default function Swing() {
 
         </div>
     </div>
+    </>
 }

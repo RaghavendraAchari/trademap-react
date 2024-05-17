@@ -44,9 +44,9 @@ export default function PendingDays({ days, error, loading, setForDate, forDate,
                                         <AlertDescription>You don't have any pending days</AlertDescription>
                                     </Alert>
                                 </div>
-                                : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 px-3">
+                                : <div className="grow overflow-y-auto max-h-[100%] mb-2 p-1 px-0">
                                     {days?.map((date, index) => {
-                                        return <Card className="my-2 hover:shadow" key={index} >
+                                        return <Card className="mb-2 hover:shadow" key={index} >
                                             <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-main-extrafade" : "")}>
                                                 <p className="text-sm font-medium self-center">{format(new Date(date), "eee, dd-MMM-yyyy")} </p>
                                                 <Button className="w-fit text-sm m-0" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>

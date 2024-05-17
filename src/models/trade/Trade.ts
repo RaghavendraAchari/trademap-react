@@ -13,4 +13,5 @@ export default interface Trade {
     pnl: number;
     isWeekend: boolean;
     imagePaths: Array<string>;
+    resultType: string
 }

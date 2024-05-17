@@ -3,3 +3,11 @@
 body {
   font-family: 'Geist Variable';
 }
+
+.scrollbar-thumb.scrollbar-thumb-y{
+  @apply bg-purple-400;
+}
+
+.scrollbar-track.scrollbar-track-y{
+  @apply rounded-full bg-purple-100;
+}
