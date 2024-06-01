@@ -93,8 +93,8 @@ export default function SideBar() {
 
 function AppLogo() {
     return <div className='flex flex-row space-x-3 justify-start items-center pb-6'>
-        <img className='h-12 pl-11 m-0' src="/app-icon-dark.svg" alt="app-icon" />
-        <h1 className='text-2xl font-bold text-start m-0'>Trade Map</h1>
+        <img className='h-12 pl-14 m-0 pt-1' src="/app-icon-dark.svg" alt="app-icon" />
+        <h1 className='text-3xl font-bold text-start m-0'>Trade Map</h1>
     </div>
 }
 

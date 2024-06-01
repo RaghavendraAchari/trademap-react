@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { HomeIcon, LibrarySquareIcon, LightbulbIcon, MessageSquareTextIcon, MicroscopeIcon, SquareArrowUpIcon, ViewIcon } from "lucide-react"
+import { HomeIcon, LibrarySquareIcon, LightbulbIcon, LucidePencilRuler, MessageSquareTextIcon, MicroscopeIcon, PencilRulerIcon, SquareArrowUpIcon, ViewIcon } from "lucide-react"
 
 interface TabDetails {
     url: string,
@@ -22,6 +22,12 @@ const tabs: TabDetails[] = [
         tabName: "All Trades",
         icon: <LibrarySquareIcon size={24} className="text-main  group-hover:animate-up group-[.selected]:animate-up" />
 
+    },
+    {
+        url: "/home/rulebook",
+        type: "INTRADAY",
+        tabName: "Rule Book",
+        icon: <LucidePencilRuler size={24} strokeWidth={1.6} className="text-main group-hover:animate-up group-[.selected]:animate-up " />,
     },
     {
         url: "/home/swing/",

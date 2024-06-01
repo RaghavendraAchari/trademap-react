@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import { useEffect } from 'react';
 import SideBar from './components/commons/SideBar';
@@ -13,19 +13,15 @@ import Insights from './routes/pages/insights/page';
 import SettingsContextProvider from './context/SettingsContext';
 import Swing from './routes/pages/swing/swing';
 import ReviewDailyNotes from './routes/pages/reviewDailyNotes/reviewDailyNotes';
+import RuleBook from './routes/pages/ruleBook/ruleBook';
 
 
 function App() {
+  const tokenData = sessionStorage.getItem("accessToken");
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const tokenData = sessionStorage.getItem("accessToken");
-
-    if (tokenData === null) {
-      return navigate("/login")
-    }
-  }, [])
+  if (tokenData === null) {
+    return <Navigate to={"/login"} />
+  }
 
   return <SettingsContextProvider>
     <div className={"flex flex-col h-screen md:flex-row min-h-screen max-h-screen divide-x"}>
@@ -43,6 +39,7 @@ function App() {
           <Route path='/analytics/' element={<Analytics />} />
           <Route path='/swing/' element={<Swing />} />
           <Route path='/reviewdailynotes/' element={<ReviewDailyNotes />} />
+          <Route path='/rulebook/' element={<RuleBook />} />
           <Route path='*' element={<Home />} />
         </Routes>
 

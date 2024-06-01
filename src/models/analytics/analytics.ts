@@ -20,7 +20,9 @@ export default interface Analytics {
     profitMakingDays: number
     lossMakingDays: number
     dateWiseProfit: { date: string, pnl: number }[]
-    investmentList: Investment[]
+    investmentList: Investment[],
+    weeklyData: {week: string, pnl: number}[]
+    monthlyData: {monthYear: string, pnl: number}[]
 }
 
 export interface Investment {

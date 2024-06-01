@@ -26,9 +26,9 @@ export default function AllTrades() {
     const navigate = useNavigate();
 
     const [filters, setFilters] = useState<TradeFilters>({
-        showHoliday: true,
-        showNoTradingDay: true,
-        showWeekend: true,
+        showHoliday: false,
+        showNoTradingDay: false,
+        showWeekend: false,
         instrumentType: {
             index: true,
             stock: true,
@@ -49,69 +49,69 @@ export default function AllTrades() {
     return <>
         <DisplayHeader title="All trades" description="All the trades that you have taken till now." className='flex-none bg-background p-3' />
         <div className="grow h-full flex flex-col md:overflow-y-auto">
-        <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
-            <div className="flex flex-row items-center space-x-4">
-                <span>Trades:</span>
-                    <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview", { state: trades })}>
-                    <span>Preview Trades</span>
-                    <PlayCircleIcon size={20} />
-                </Button>
-            </div>
-            <div className="flex flex-row space-x-4 w-full justify-end">
-                <div className="flex flex-row items-center space-x-1">
-                    <span className="whitespace-nowrap text-sm font-medium">Go to date:</span>
-
-                    <DatePicker onChange={(date) => {
-                        const element = document.getElementById(format(date, "dd MMM yyyy"));
-
-                        element?.scrollIntoView({ behavior: "smooth" });
-                    }} />
+            <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
+                <div className="flex flex-row items-center space-x-4">
+                    <span>Trades:</span>
+                        <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview", { state: trades })}>
+                        <span>Preview Trades</span>
+                        <PlayCircleIcon size={20} />
+                    </Button>
                 </div>
-                <SortByDate sort={sort} setSort={setSort} />
-                <DropdownMenu open={filtersOpen} onOpenChange={setFiltersOpen} >
-                    <DropdownMenuTrigger asChild className="cursor-pointer ml-1 md:hidden block">
-                        <Button className="space-x-1 " size={"icon"} variant={"ghost"}>
+                <div className="flex flex-row space-x-4 w-full justify-end">
+                    <div className="flex flex-row items-center space-x-1">
+                        <span className="whitespace-nowrap text-sm font-medium">Go to date:</span>
 
-                            <MoreVertical size={16} />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="text-xs">
-                        <DropdownMenuLabel>Filters</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuCheckboxItem
-                            checked={filters.showHoliday}
-                            onCheckedChange={(checked) => {
-                                setFilters(state => {
-                                    return { ...state, showHoliday: checked }
-                                })
-                            }}
-                        >
-                            Show holiday
-                        </DropdownMenuCheckboxItem>
-                        <DropdownMenuCheckboxItem
-                            checked={filters.showNoTradingDay}
-                            onCheckedChange={(checked) => {
-                                setFilters(state => {
-                                    return { ...state, showNoTradingDay: checked }
-                                })
-                            }}
-                        >
-                            Show no trading days
-                        </DropdownMenuCheckboxItem>
-                        <DropdownMenuCheckboxItem
-                            checked={filters.showWeekend}
-                            onCheckedChange={(checked) => {
-                                setFilters(state => {
-                                    return { ...state, showWeekend: checked }
-                                })
-                            }}
-                        >
-                            Show weekends
-                        </DropdownMenuCheckboxItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                        <DatePicker onChange={(date) => {
+                            const element = document.getElementById(format(date, "dd MMM yyyy"));
+
+                            element?.scrollIntoView({ behavior: "smooth" });
+                        }} />
+                    </div>
+                    <SortByDate sort={sort} setSort={setSort} />
+                    <DropdownMenu open={filtersOpen} onOpenChange={setFiltersOpen} >
+                        <DropdownMenuTrigger asChild className="cursor-pointer ml-1 md:hidden block">
+                            <Button className="space-x-1 " size={"icon"} variant={"ghost"}>
+
+                                <MoreVertical size={16} />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="text-xs">
+                            <DropdownMenuLabel>Filters</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuCheckboxItem
+                                checked={filters.showHoliday}
+                                onCheckedChange={(checked) => {
+                                    setFilters(state => {
+                                        return { ...state, showHoliday: checked }
+                                    })
+                                }}
+                            >
+                                Show holiday
+                            </DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem
+                                checked={filters.showNoTradingDay}
+                                onCheckedChange={(checked) => {
+                                    setFilters(state => {
+                                        return { ...state, showNoTradingDay: checked }
+                                    })
+                                }}
+                            >
+                                Show no trading days
+                            </DropdownMenuCheckboxItem>
+                            <DropdownMenuCheckboxItem
+                                checked={filters.showWeekend}
+                                onCheckedChange={(checked) => {
+                                    setFilters(state => {
+                                        return { ...state, showWeekend: checked }
+                                    })
+                                }}
+                            >
+                                Show weekends
+                            </DropdownMenuCheckboxItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
-        </div>
         <div className="grow flex flex-col md:max-h-full md:overflow-y-auto px-3 py-2">
             {
                 fetchingData && <Loading />
@@ -129,11 +129,13 @@ export default function AllTrades() {
                     : null
             }
             {
-                fetchingData === false && trades && trades.length === 0 ? <Alert variant={"default"}>
+                fetchingData === false && trades && trades.length === 0 
+                ? <Alert variant={"default"}>
                     <Terminal />
                     <AlertTitle>No trades found</AlertTitle>
                     <AlertDescription>It looks like you have not taken any trades.</AlertDescription>
-                </Alert> : null
+                  </Alert> 
+                : null
             }
         </div>
     </div>

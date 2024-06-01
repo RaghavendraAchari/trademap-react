@@ -7,6 +7,7 @@ import 'non.geist'
 
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Redirect />,
+    element: <Navigate to={"/home"} />,
   },
   {
     path: "*",
@@ -48,12 +49,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router} />
 )
 
-function Redirect() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/home")
-  })
-
-  return null;
-}
+// function Redirect() {
+//   return ;
+// }
