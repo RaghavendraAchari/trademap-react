@@ -35,16 +35,17 @@ export default function InsightViewWeb({ insight, editContent, setContentEdit, s
         <div className="grow md:flex md:flex-col md:h-full md:max-h-full md:overflow-y-auto">
             {insight.content === "" && (editContent === false)
                 ? <AskForEdit />
-                : <div
-                    data-wrapper
-                    data-scrollbar
-                    className="md:flex md:flex-col md:w-full items-end space-y-2 p-2">
+                : <div className="md:flex md:flex-col md:max-w-full space-y-2 p-2 md:overflow-y-auto">
+                    <div
+                        data-wrapper
+                        data-scrollbar >
+                    
+                    <Editor autofocus={true} className={`min-w-full ${editContent === false ? "-mt-8" : "max-h-full"}`} id={"editor"} data={insightContent} edit={editContent} setData={setEditorData} />
 
-                    <Editor className="-mt-8" id={"editor"} data={insightContent} edit={editContent} setData={setEditorData} />
-
-                    {editContent === true && <Button variant={"outline"} size={"default"} onClick={() => setContentEdit(false)}>Cancel editing</Button>}
+                    
+                    </div>
                 </div>
             }
-        </div>
+        </div>  
     </>
 }

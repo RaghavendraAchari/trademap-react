@@ -8,12 +8,13 @@ import { Toaster } from './components/ui/toaster';
 import Home from './routes/pages/dashboard/page';
 import Page from './routes/pages/allTrades/page';
 import NotesPage from './routes/pages/notes/page';
-import Analytics from './routes/pages/analytics/page';
+import AnalyticsPage from './routes/pages/analytics/page';
 import Insights from './routes/pages/insights/page';
 import SettingsContextProvider from './context/SettingsContext';
 import Swing from './routes/pages/swing/swing';
 import ReviewDailyNotes from './routes/pages/reviewDailyNotes/reviewDailyNotes';
 import RuleBook from './routes/pages/ruleBook/ruleBook';
+import ErrorPage from './routes/error/error';
 
 
 function App() {
@@ -36,11 +37,12 @@ function App() {
           <Route path='/alltrades/*' element={<Page />} />
           <Route path='/notes/' element={<NotesPage />} />
           <Route path='/insights/' element={<Insights />} />
-          <Route path='/analytics/' element={<Analytics />} />
+          <Route path='/analytics/' element={<AnalyticsPage />} />
           <Route path='/swing/' element={<Swing />} />
           <Route path='/reviewdailynotes/' element={<ReviewDailyNotes />} />
           <Route path='/rulebook/' element={<RuleBook />} />
-          <Route path='*' element={<Home />} />
+          <Route path='/dashboard/' element={<Home />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
 
         <Toaster />

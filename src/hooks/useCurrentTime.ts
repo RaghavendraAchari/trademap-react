@@ -15,7 +15,7 @@ export default function useCurrentDate() {
     }, [])
 
     return {
-        dateAsString: format(date, "dd-MMM-yyyy h:mm:ss a"),
+        dateAsString: format(date, "d-MMM-yyyy h:mm:ss a"),
         date
     }
 }

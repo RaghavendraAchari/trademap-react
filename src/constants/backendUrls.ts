@@ -23,6 +23,10 @@ const users = baseUrl + "/users"
 const investmentDetails = baseUrl + "/investmentdetails"
 const dailyNote = baseUrl + "/dailyNote"
 
+const rules = baseUrl + "/rules"
+
+const watchlist = baseUrl + "/swing/watchlist"
+
 export default {
     baseUrl: baseUrl,
     tradeDetails: {
@@ -55,7 +59,11 @@ export default {
     dailyNote: {
         allNotes: dailyNote,
         todaysNote: dailyNote + "/today"
-    }
+    },
+    rules:{
+        rules
+    },
+    watchlist
 }
 
 function getImageDownloadablePath(path: string) {

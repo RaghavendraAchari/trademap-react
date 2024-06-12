@@ -14,9 +14,11 @@ type Props = {
     edit: boolean,
     className?: string
     autoSave?: boolean
+    onCancel?: boolean
+    autofocus?: boolean
 };
 
-export default function Editor({ id, data, setData, edit = false, className, autoSave }: Props) {
+export default function Editor({ id, data, setData, edit = false, className, autoSave, onCancel, autofocus }: Props) {
     //add a reference to editor
     const ref = useRef<EditorJS>();
 
@@ -43,6 +45,7 @@ export default function Editor({ id, data, setData, edit = false, className, aut
             tools: EDITOR_JS_TOOLS,
             data: data,
             readOnly: !edit,
+            autofocus: autofocus ? autofocus : false,
             onReady() {
                 ref.current = editor;
             },

@@ -1,6 +1,6 @@
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import ContentMenu from "./contextMenu";
-import { Edit3, Loader2, Trash2 } from "lucide-react";
+import { CircleXIcon, Edit3, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Dispatch, HTMLAttributes, SetStateAction, useState } from "react";
@@ -32,13 +32,16 @@ export function InsightHeader({ title, edit, setContentEdit, className, onDelete
             <div className="flex flex-row space-x-1">
                 {
                     edit
-                        ? <div className="flex  p-2 space-x-2">
+                        ? <>
+                            <div className="flex  p-2 space-x-2">
                             <p className="self-center text-xs text-muted-foreground">Edit mode is on</p>
                             <span className="relative flex h-3 w-3 ">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
                             </span>
                         </div>
+                        <Button variant={"link"} size={"default"} onClick={() => setContentEdit(false)}> <span>Cancel editing</span><CircleXIcon size={20} className="ml-1"/> </Button>
+                        </>
                         :
                         <ContentMenu toolTipTitle="Edit" onClick={() => setContentEdit(true)}>
                             <Edit3 size={16} />

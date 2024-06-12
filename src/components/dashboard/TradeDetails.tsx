@@ -8,7 +8,7 @@ import NoTradingDayForm from "../tradeDetails/NoTradingDayForm";
 import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
 import { useContext, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Terminal } from "lucide-react";
+import { PrinterIcon, Terminal } from "lucide-react";
 import { SettingsContext } from "@/context/SettingsContext";
 import TradesOfTheDay from "./TradesOfTheDay";
 
@@ -29,7 +29,10 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
     return <div data-tradedetails className={cn(className)} {...props}>
         <div className="flex flex-row justify-between align-center mb-2 flex-none px-3">
             <h3 className="text-lg font-bold">Trades:</h3>
-            <div className="flex flex-col justify-end space-y-1 space-x-2 md:flex-none md:flex-row md:justify-end md:space-y-0">
+            <div className="flex flex-col justify-end items-center space-y-1 space-x-2 md:flex-none md:flex-row md:justify-end md:space-y-0">
+                {trades && <a className="mx-2 hover:cursor-pointer opacity-70 hover:opacity-100" title="Print these trades" onClick={(e) => {e.preventDefault()}}>
+                        <PrinterIcon size={24} />
+                    </a>}
                 {trades && <TotalTrades trades={trades} />}
                 {trades && <TotalPnL trades={trades} />}
                 <Badge className="mr-2" variant="outline">For: {forDate.toDateString()}</Badge>
@@ -43,7 +46,7 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
 
         <Separator className="flex-none " />
 
-        <div className="grow w-full max-h-full flex flex-col px-1 md:overflow-y-auto">
+        <div className="grow w-full max-h-full flex flex-col px-0 md:overflow-y-auto">
             {loading ? <Loading /> : null}
 
             {

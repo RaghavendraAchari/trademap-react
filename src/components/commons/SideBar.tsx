@@ -32,7 +32,7 @@ export default function SideBar() {
                 {
                         tabs.filter(tab => tab.type === "INTRADAY").map(tab => {
                             return <Link to={tab.url} key={tab.url}>
-                                <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname === tab.url ? 'bg-main-fade border-main selected' : "border-white")} >
+                                <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname.includes(tab.url) ? 'bg-main-fade border-main selected' : "border-white")} >
                                     <span className='group-hover:bg-fuchsia-100 group-hover:rounded-full group-[.selected]:bg-fuchsia-100 group-[.selected]:rounded-full'>{tab.icon}</span>
                                     <span>{tab.tabName}</span></li>
                             </Link>
@@ -44,7 +44,7 @@ export default function SideBar() {
                     {
                         tabs.filter(tab => tab.type === "SWING").map(tab => {
                             return <Link to={tab.url} key={tab.url}>
-                                <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname === tab.url ? 'bg-main-fade border-main selected' : "border-white")} >
+                                <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname.includes(tab.url) ? 'bg-main-fade border-main selected' : "border-white")} >
                                     <span className='group-hover:bg-fuchsia-100 group-hover:rounded-full group-[.selected]:bg-fuchsia-100 group-[.selected]:rounded-full'>{tab.icon}</span>
                                     <span>{tab.tabName}</span></li>
                             </Link>
@@ -56,7 +56,7 @@ export default function SideBar() {
                     {
                         tabs.filter(tab => tab.type === "STUDY").map(tab => {
                         return <Link to={tab.url} key={tab.url}>
-                            <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname === tab.url ? 'bg-main-fade border-main selected' : "border-white")} >
+                            <li className={"flex flex-row text-main font-semibold justify-start items-center space-x-2 p-3 border-l-2  hover:bg-main-fade group " + (pathname.includes(tab.url) ? 'bg-main-fade border-main selected' : "border-white")} >
                                 <span className='group-hover:bg-fuchsia-100 group-hover:rounded-full group-[.selected]:bg-fuchsia-100 group-[.selected]:rounded-full'>{tab.icon}</span>
                                 <span>{tab.tabName}</span></li>
                         </Link>

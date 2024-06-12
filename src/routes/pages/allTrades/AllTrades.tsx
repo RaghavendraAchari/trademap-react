@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import TradeDetailsList from "@/components/tradeDetails/TradeDetailsList";
 import { Dispatch, HTMLAttributes, SetStateAction, useState } from "react";
 import Loading from "@/components/loading/loading";
-import { DotIcon, MoreVertical, PlayCircleIcon, Terminal } from "lucide-react";
+import { DotIcon, MoreVertical, PlayCircleIcon, PrinterIcon, Terminal } from "lucide-react";
 import { SORT } from "@/constants/SortType";
 import { SortByDate } from "@/components/commons/SortByDate";
 import useFetchAllTrades from "@/hooks/allTrades/useFetchAllTrades";
@@ -26,18 +26,18 @@ export default function AllTrades() {
     const navigate = useNavigate();
 
     const [filters, setFilters] = useState<TradeFilters>({
-        showHoliday: false,
-        showNoTradingDay: false,
-        showWeekend: false,
+        showHoliday: true,
+        showNoTradingDay: true,
+        showWeekend: true,
         instrumentType: {
-            index: true,
-            stock: true,
-            commodity: true,
+            index: false,
+            stock: false,
+            commodity: false,
         },
         resultType: {
-            targetOrPartialTarget: true,
-            SLorPartialSL: true,
-            CTC: true
+            targetOrPartialTarget: false,
+            SLorPartialSL: false,
+            CTC: false
         }
     })
 
@@ -52,10 +52,14 @@ export default function AllTrades() {
             <div className="w-full border-b flex-none text-lg font-bold bg-background py-2 flex flex-row justify-between items-center px-3">
                 <div className="flex flex-row items-center space-x-4">
                     <span>Trades:</span>
-                        <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview", { state: trades })}>
-                        <span>Preview Trades</span>
+                    <Button className="space-x-2 p-0 h-8" variant={"link"} size={"sm"} onClick={() => navigate("/home/allTrades/preview", { state: trades })}>
+                        <span>Review filtered trades</span>
                         <PlayCircleIcon size={20} />
                     </Button>
+                    <a className="hover:cursor-pointer opacity-70 hover:opacity-100" title="Print these trades" onClick={(e) => {e.preventDefault()}}>
+                        <PrinterIcon size={24} />
+                    </a>
+                    <span className="text-sm w-52 opacity-80">Total trades: {trades?.length.toString()}</span>
                 </div>
                 <div className="flex flex-row space-x-4 w-full justify-end">
                     <div className="flex flex-row items-center space-x-1">
@@ -130,11 +134,14 @@ export default function AllTrades() {
             }
             {
                 fetchingData === false && trades && trades.length === 0 
-                ? <Alert variant={"default"}>
-                    <Terminal />
-                    <AlertTitle>No trades found</AlertTitle>
-                    <AlertDescription>It looks like you have not taken any trades.</AlertDescription>
-                  </Alert> 
+                ? <div className="md:grid md:grid-cols-8 gap-1 divide-x h-full overflow-y-auto">
+                    <Alert variant={"default"} className="col-span-6 h-fit">
+                        <Terminal />
+                        <AlertTitle>No trades found</AlertTitle>
+                        <AlertDescription>It looks like you have not taken any trades.</AlertDescription>
+                      </Alert>
+                      <TradeFiltersWindow filters={filters} setFilters={setFilters} />
+                </div>
                 : null
             }
         </div>
@@ -299,7 +306,7 @@ function TradeFiltersWindow({ filters: state, setFilters: setFilterState, classN
             <Label className="cursor-pointer" htmlFor="CTC">Cost To Cost (CTC)</Label>
         </div>
         <div className="flex space-x-1 items-center justify-end p-2">
-            <Button variant={"outline"} size={"sm"} onClick={() => setFilterState(filters)}>Apply Filters</Button>
+            <Button variant={"outline"} size={"sm"} onClick={() => setFilterState({...filters})}>Apply Filters</Button>
         </div>
 
     </div>

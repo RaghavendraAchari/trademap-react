@@ -11,7 +11,7 @@ interface TabDetails {
 
 const tabs: TabDetails[] = [
     {
-        url: "/home",
+        url: "/home/dashboard/",
         type: "INTRADAY",
         tabName: "Dashboard",
         icon: <HomeIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up " />,
@@ -19,20 +19,20 @@ const tabs: TabDetails[] = [
     {
         url: "/home/allTrades/",
         type: "INTRADAY",
-        tabName: "All Trades",
+        tabName: "All trades",
         icon: <LibrarySquareIcon size={24} className="text-main  group-hover:animate-up group-[.selected]:animate-up" />
 
     },
     {
         url: "/home/rulebook",
         type: "INTRADAY",
-        tabName: "Rule Book",
+        tabName: "Rule book",
         icon: <LucidePencilRuler size={24} strokeWidth={1.6} className="text-main group-hover:animate-up group-[.selected]:animate-up " />,
     },
     {
         url: "/home/swing/",
         type: "SWING",
-        tabName: "Swing Trade",
+        tabName: "Swing trade",
         icon: <SquareArrowUpIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },
@@ -46,7 +46,7 @@ const tabs: TabDetails[] = [
     {
         url: "/home/notes/",
         type: "STUDY",
-        tabName: "Personal Notes",
+        tabName: "Personal notes",
         icon: <MessageSquareTextIcon size={24} className="text-main group-hover:animate-up group-[.selected]:animate-up" />
 
     },

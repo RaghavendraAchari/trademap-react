@@ -14,22 +14,33 @@ export default function useFetchAllTrades(url: string, sort?: SORT, filters?: Tr
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
 
+    const generateParams = () => {
+        const params: any = {
+            sort: sort,
+        };
+
+        if(filters?.showHoliday) params['showHoliday'] = true
+        if(filters?.showNoTradingDay) params['showNoTradingDay'] = true
+        if(filters?.showWeekend) params['showWeekend'] = true
+
+        if(filters?.instrumentType?.stock) params['showStocks'] = true
+        if(filters?.instrumentType.index) params['showFno'] = true
+        if(filters?.instrumentType.commodity) params['showCommodity'] = true
+
+        if(filters?.resultType?.targetOrPartialTarget) params['showTargetOrPartialTarget'] = true
+        if(filters?.resultType?.SLorPartialSL) params['showSLorPartialSL'] = true
+        if(filters?.resultType.CTC) params['showCTC'] = true
+
+        console.log(params);
+        
+        return params;
+    }
+
     const fetchData = () => {
         setLoading(true) 
 
         http.get(url, {
-            params: {
-                sort: sort,
-                showHoliday: filters?.showHoliday,
-                showNoTradingDay: filters?.showNoTradingDay,
-                showWeekend: filters?.showWeekend,
-                showStocks: filters?.instrumentType?.stock,
-                showFno: filters?.instrumentType?.index,
-                showCommodity: filters?.instrumentType?.commodity,
-                showTargetOrPartialTarget: filters?.resultType?.targetOrPartialTarget,
-                showSLorPartialSL: filters?.resultType?.SLorPartialSL,
-                showCTC: filters?.resultType?.CTC,
-            },
+            params: generateParams()
         })
             .then(res => {
                 setList(res.data)

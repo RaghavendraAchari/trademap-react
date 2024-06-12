@@ -54,6 +54,7 @@
     "cmdk": "^0.2.1",
     "date-fns": "^2.30.0",
     "embla-carousel-react": "^8.0.0-rc22",
+    "framer-motion": "^11.2.10",
     "geist": "^1.2.2",
     "lucide-react": "^0.359.0",
     "next-themes": "^0.3.0",
