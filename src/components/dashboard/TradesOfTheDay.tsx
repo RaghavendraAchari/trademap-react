@@ -34,7 +34,7 @@ export default function TradesOfTheDay({ trades, forDate, onDataSubmit, maxTrade
 
             <TradeDetailsList tradesList={sortedTrades} showFullDate={false} showOptions={true} />
 
-            <div className="flex flex-row justify-center py-2 space-x-4 mt-5">
+            <div className="flex flex-row justify-center py-2 mt-5">
                 <TradeDetailsForm forDate={forDate} onDataSubmit={onDataSubmit} />
                 <TodaysNote />
             </div>

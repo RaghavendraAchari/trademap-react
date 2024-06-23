@@ -243,10 +243,10 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
 
     }, [instrumentName, setupName])
 
-    return <div className="px-2">
+    return <div className="px-3 flex flex-row justify-center">
         <Dialog open={formOpen} onOpenChange={setFormOpen}>
             <DialogTrigger asChild >
-                <Button disabled={disabled} className="justify-self-center w-fit " variant={"outline"}>+ Add new trade details</Button>
+                <Button disabled={disabled} className="justify-self-center w-fit rounded-full shadow" variant={"default"}>+ Add new trade details</Button>
             </DialogTrigger>
             <DialogContent className="max-w-[1200px]">
             <DialogHeader>
@@ -265,7 +265,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
                         <div className="grid w-full max-w-full items-center gap-4 p-2">
 
                             <div className="w-full flex flex-row space-x-4">
-                                <Label aria-label="max-day" className="text-sm text-slate-500 flex-1">Max days traded: {maxDay ? maxDay : 0}</Label>
+                                <Label aria-label="max-day" className="text-sm text-slate-500 flex-1 border rounded-lg border-green-500 bg-green-50 shadow flex flex-row justify-center items-center">Max days traded: {maxDay ? maxDay : 0}</Label>
 
                                 <div className="label-distance flex-1">
                                     <Label aria-label="Day" htmlFor="day">Day: </Label>
@@ -385,7 +385,7 @@ export default function TradeDetailsForm({ forDate, onDataSubmit, disabled }: Pr
                             <div className="w-full flex flex-row space-x-4">
                         <div className="label-distance">
                             <Label htmlFor="pnl">Profit / Loss: </Label>
-                            <Input type="number" id="pnl" name="pnl" placeholder="Profit/loss in (+/-)rupees" required />
+                            <Input type="number" id="pnl" name="pnl" placeholder="Profit/loss in (+/-)rupees" required step={0.05}/>
                         </div>
 
                         <div className="label-distance">

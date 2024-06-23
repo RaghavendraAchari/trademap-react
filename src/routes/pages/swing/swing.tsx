@@ -7,6 +7,7 @@ import useFetch from "@/hooks/useFetch";
 import backendUrls from "@/constants/backendUrls";
 import Loading from "@/components/loading/loading";
 import http from "@/hooks/axiosConfig";
+import Loader from "@/components/commons/LoadingSpinner";
 
 
 export type Stock = {
@@ -31,34 +32,30 @@ export default function Swing() {
             }
         })
         .catch(err => console.log(err))
-        .finally(() => setNewStock(""))
-        
     }
 
-    const [timeline, setTimeline] = useState<EditorJS.OutputData>();
-    const [newStock, setNewStock] = useState<string>("")
     const [selectedStock, setSelectedStock] = useState<Stock>()
 
     const {data:watchlist, loading: watchlistLoading, error: watchlistError, refresh: watchlistRefresh} = useFetch<Stock[]>(backendUrls.watchlist);
     
-    // console.log(watchlist);
-    
     return <>
         <DisplayHeader title="Swing Trade" description="Actively monitor and track short term trades." className='flex-none bg-background p-3' />
         <div className="md:grid md:grid-cols-[20%_50%_30%] divide-x h-full max-h-full overflow-y-auto">
-            {(!watchlistLoading && watchlist && !watchlistError) ? <Watchlist setSelectedStock={setSelectedStock} selectedStock={selectedStock} addNewStock={addNewStock} stockList={watchlist} onDelete={(id: number) => {
-                http.delete<boolean>(`${backendUrls.watchlist}/${id}`)
-                .then( res => {
-                    if(res.data === true)
-                        watchlistRefresh();
-                    
-                })
-                .catch(err => console.log(err))
-            }}/> : <Loading />}
+            {
+                (!watchlistLoading && watchlist && !watchlistError) 
+                ? <Watchlist setSelectedStock={setSelectedStock} selectedStock={selectedStock} addNewStock={addNewStock} stockList={watchlist} onDelete={(id: number) => {
+                        http.delete<boolean>(`${backendUrls.watchlist}/${id}`)
+                        .then( res => {
+                            if(res.data === true)
+                                watchlistRefresh();
+                        })
+                        .catch(err => console.log(err))
+                    }}/> : <Loader loading />
+            }
 
             <Timeline />
 
-            <Positions />
+            <Positions selectedStock={selectedStock}/>
         </div>
     </>
 }

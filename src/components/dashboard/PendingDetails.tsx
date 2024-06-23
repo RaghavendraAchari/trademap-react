@@ -49,7 +49,7 @@ export default function PendingDays({ days, error, loading, setForDate, forDate,
                                         return <Card className="mb-2 hover:shadow" key={index} >
                                             <CardHeader className={"flex flex-row justify-between align-center px-4 py-2 space-y-0 " + ((forDate.toDateString() === new Date(date).toDateString()) ? "bg-main-extrafade" : "")}>
                                                 <p className="text-sm font-medium self-center">{format(new Date(date), "eee, d-MMM-yyyy")} </p>
-                                                <Button className="w-fit text-sm m-0" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>
+                                                <Button className="w-fit text-sm m-0 rounded-full" size={"sm"} variant={"outline"} onClick={() => setForDate(new Date(date))}>Fill now</Button>
                                             </CardHeader>
                                         </Card>
                                     })}

@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <div className="md:flex md:flex-col md:grow md:max-h-full md:divide-y md:overflow-y-auto">
         <Routes>
-          <Route path="/dashboard/note" element={<DialyNote />} />
+          <Route path="/note" element={<DialyNote />} />
           <Route path="/" element={<DashBoard />} />
         </Routes>
       </div>

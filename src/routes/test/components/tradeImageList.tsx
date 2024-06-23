@@ -54,7 +54,7 @@ export default function TradeImageList({ trade }: { trade: Trade }) {
                                 return <CarouselItem className="w-full h-full" key={index} >
                                     <Card className="w-full h-full p-1">
                                         <CardContent className="w-full h-full p-0">
-                                            <ImageWithLoader path={image} />
+                                            <ImageWithLoader className="aspect-video object-contain" path={image} />
                                         </CardContent>
                                     </Card>
                                 </CarouselItem>
@@ -89,7 +89,7 @@ function ImageWithLoader({ path, onClick, className }: { className?: string, pat
             onLoad={() => {
                 setLoading(false)
             }}
-            className={"w-full h-full  aspect-video object-none image-rendering" + (!loading ? "block" : "hidden")} src={backendUrls.tradeDetails.getImageDownloadablePath(path)} alt="path" />}
+            className={"w-full h-full  aspect-video object-contain image-rendering" + (!loading ? "block" : "hidden")} src={backendUrls.tradeDetails.getImageDownloadablePath(path)} alt="path" />}
     </div>
 
 }

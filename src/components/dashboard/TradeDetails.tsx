@@ -51,11 +51,11 @@ export default function TradesDetails({ trades, error, loading, forDate, setForD
 
             {
                 !loading && trades && trades.length === 0
-                    ? <>
+                    ? <div className="space-y-4">
                         <NoTradesBanner />
                         <TradeDetailsForm forDate={forDate} onDataSubmit={onDataSubmit} />
                         <NoTradingDayForm forDate={forDate} onDataSubmit={onDataSubmit} />
-                    </>
+                    </div>
                     : null
             }
 

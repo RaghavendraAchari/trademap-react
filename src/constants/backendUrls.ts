@@ -24,7 +24,8 @@ const investmentDetails = baseUrl + "/investmentdetails"
 const dailyNote = baseUrl + "/dailyNote"
 
 const rules = baseUrl + "/rules"
-
+const swingPositions = baseUrl + "/swing/positions"
+const timeLine = baseUrl + "/swing/positions"
 const watchlist = baseUrl + "/swing/watchlist"
 
 export default {
@@ -61,9 +62,14 @@ export default {
         todaysNote: dailyNote + "/today"
     },
     rules:{
-        rules
+        rules,
+
     },
-    watchlist
+    watchlist,
+    swing: {
+        swingPositions,
+        timeLine,
+    }
 }
 
 function getImageDownloadablePath(path: string) {

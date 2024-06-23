@@ -102,6 +102,15 @@
   @apply rounded-b-full;
 }
 
+
+.history:first-child .timeline{
+  @apply rounded-t-full;
+}
+
+.history:last-child .timeline{
+  @apply rounded-b-full;
+}
+
 .note:not(:last-child) .timeline{
   @apply border-b-0;
 }

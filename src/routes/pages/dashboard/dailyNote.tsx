@@ -2,8 +2,6 @@ import DisplayHeader from "@/components/commons/DisplayHeader";
 import Editor from "@/components/textEditor/editor";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import backendUrls from "@/constants/backendUrls";
 import http from "@/hooks/axiosConfig";

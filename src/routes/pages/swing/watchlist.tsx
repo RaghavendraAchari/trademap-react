@@ -20,7 +20,7 @@ interface Props extends HTMLAttributes<HTMLDivElement>{
 export default function Watchlist({stockList, setSelectedStock, selectedStock, className, addNewStock, onDelete}:Props){
     const [newStock, setNewStock] = useState<string>("")
 
-    return <div className={cn("h-full flex flex-col max-h-full", className)}>
+    return <div className={cn("h-full flex flex-col max-h-full divide-y", className)}>
     <div className="divide-y grow">
         <h3 className="px-3 py-3 bg-purple-100 flex-none flex flex-row items-center space-x-2"><CctvIcon size={20} /><span className=" font-semibold"> Watchlist</span></h3>
         <div className="h-full flex flex-col divide-y space-y-1 grow">
@@ -45,8 +45,10 @@ export default function Watchlist({stockList, setSelectedStock, selectedStock, c
             
         </div>
     </div>
-    <div className="space-y-2 flex-none px-3 flex justify-center flex-col">
+    <div className="space-x-2 h-[85px] flex-none px-3 py-2 flex justify-center flex-row items-start">
         <Input 
+            className="min-h-10"
+            autoComplete="off"
            value={newStock}
            onKeyUp={e => {
             e.preventDefault();
@@ -62,7 +64,7 @@ export default function Watchlist({stockList, setSelectedStock, selectedStock, c
             name="newStock"
             id="newStock"
         />
-        <Button className="space-x-1" size={"sm"} variant={"ghost"} onClick={() => addNewStock(newStock)}><CirclePlusIcon size={16} /> <span>Add new stock</span></Button>
+        <Button className="space-x-1 flex-none rounded-full p-0" size={"icon"} variant={"default"} onClick={() => addNewStock(newStock)}><CirclePlusIcon size={20} /></Button>
     </div>
 </div>
 }

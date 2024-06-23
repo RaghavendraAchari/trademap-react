@@ -41,7 +41,7 @@ function App() {
           <Route path='/swing/' element={<Swing />} />
           <Route path='/reviewdailynotes/' element={<ReviewDailyNotes />} />
           <Route path='/rulebook/' element={<RuleBook />} />
-          <Route path='/dashboard/' element={<Home />} />
+          <Route path='/dashboard/*' element={<Home />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
 
